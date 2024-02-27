@@ -16,8 +16,15 @@ const Addevent = () => {
         city: '',
         paid: false,
         price: '',
+        meetinglink: '',
         image: null,
     });
+
+    const [Offline, setOffline] = useState("False")
+
+    const handleoffline = (e) => {
+        setOffline = !Offline
+    }
 
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
@@ -56,8 +63,10 @@ const Addevent = () => {
             {/* <div className="bg-cover bg-center h-screen w-screen flex items-center justify-center" style={{ backgroundImage:  'url("src/Assets/Images/bg1.jpg")'  }}> */}
 
             {/* </div> */}
-            <div className=" h-screen flex items-center justify-center overflow-hidden w-screen" style={{ backgroundImage: `url(${b2})`, backgroundRepeat:"no-repeat",backgroundSize:"contain"  }}>
-                <div className="bg-transparent   p-8 rounded shadow-md backdrop-blur-md  w-10/12">
+            <div className=" h-screen bg-gray-200 flex items-center justify-center overflow-hidden w-screen"
+            // style={{ backgroundImage: `url(${b2})`, backgroundRepeat:"no-repeat",backgroundSize:"contain"  }}
+            >
+                <div className="bg-white  p-8 rounded shadow-md backdrop-blur-md  w-10/12">
                     {/* <div className='w-full h-full bg-transparent blur-sm'> hello</div> */}
                     <h2 className="text-5xl font-bold mb-4 justify-center text-center">Add Event</h2>
 
@@ -76,7 +85,7 @@ const Addevent = () => {
                                         name="title"
                                         value={formData.title}
                                         onChange={handleChange}
-                                        className="mt-1 p-2 w-full border rounded-md"
+                                        className="mt-1 p-2 w-full border rounded-md bg-slate-100"
                                     />
                                 </div>
 
@@ -91,7 +100,7 @@ const Addevent = () => {
                                         value={formData.description}
                                         onChange={handleChange}
                                         rows="3"
-                                        className="mt-1 p-2 w-full border rounded-md"
+                                        className="mt-1 p-2 w-full border rounded-md bg-slate-100"
                                     ></textarea>
                                 </div>
 
@@ -107,7 +116,7 @@ const Addevent = () => {
                                             name="startDateTime"
                                             value={formData.startDateTime}
                                             onChange={handleChange}
-                                            className="mt-1 p-2 w-full border rounded-md"
+                                            className="mt-1 p-2 w-full border rounded-md bg-slate-100"
                                         />
                                     </div>
 
@@ -122,7 +131,7 @@ const Addevent = () => {
                                             name="endDateTime"
                                             value={formData.endDateTime}
                                             onChange={handleChange}
-                                            className="mt-1 p-2 w-full border rounded-md"
+                                            className="mt-1 p-2 w-full border rounded-md bg-slate-100"
                                         />
                                     </div>
                                 </div>
@@ -130,63 +139,19 @@ const Addevent = () => {
                                     <label htmlFor="image" className="block text-sm font-medium text-gray-600">
                                         Image
                                     </label>
-                                    <input
-                                        type="file"
-                                        id="image"
-                                        name="image"
-                                        accept="image/*"
-                                        onChange={handleChange}
-                                        className="mt-1"
-                                    />
+                                    <div className='bg-slate-100 h-12 flex justify-center items-center rounded-md'>
+                                        <input
+                                            type="file"
+                                            id="image"
+                                            name="image"
+                                            accept="image/*"
+                                            onChange={handleChange}
+                                            className="mt-1"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className='w-1/2'>
-
-                                {/* Address, Pincode, City */}
-                                <div className="mb-4 flex flex-row w-full gap-5">
-                                    <div className='w-1/2'>
-                                        <label htmlFor="city" className="block text-sm font-medium text-gray-600">
-                                            City
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="city"
-                                            name="city"
-                                            value={formData.city}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 border rounded-md w-full"
-                                        />
-                                    </div>
-                                    <div className='w-1/2'>
-                                        <label htmlFor="pincode" className="block text-sm font-medium text-gray-600">
-                                            Pincode
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="pincode"
-                                            name="pincode"
-                                            value={formData.pincode}
-                                            onChange={handleChange}
-                                            className="mt-1 p-2 w-full border rounded-md"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label htmlFor="address" className="block text-sm font-medium text-gray-600">
-                                        Address
-                                    </label>
-                                    <textarea
-                                        type="text"
-                                        id="address"
-                                        name="address"
-                                        value={formData.address}
-                                        onChange={handleChange}
-                                        className="mt-1 p-2 w-full border rounded-md"
-                                    />
-                                    {/* </div> */}
-                                </div>
-
-                                {/* <div className="w-1/2"> */}
                                 {/* Event Mode (Online/Offline) */}
 
                                 <div className="mb-4 mt-5">
@@ -196,18 +161,86 @@ const Addevent = () => {
                                             type="checkbox"
                                             id="eventMode"
                                             name="eventMode"
-                                            checked={formData.eventMode === 'online'}
+                                            checked={formData.eventMode === 'offline'}
                                             onChange={() =>
                                                 handleChange({
-                                                    target: { name: 'eventMode', value: formData.eventMode === 'online' ? 'offline' : 'online' },
+                                                    target: { name: 'eventMode', value: formData.eventMode === 'offline' ? 'online' : 'offline' },
                                                 })
                                             }
                                             className="sr-only peer"
                                         />
-                                        <div className="peer rounded-full outline-none duration-100 after:duration-500 w-[120px] h-14 bg-blue-300 after:content-['Offline'] after:absolute after:outline-none after:rounded-full after:h-12 after:w-14 after:bg-white after:top-1 after:left-1 after:flex after:justify-center after:items-center after:text-sky-800 after:font-bold peer-checked:after:translate-x-14 peer-checked:after:content-['Online'] peer-checked:after:border-white">
+                                        <div className="peer rounded-full outline-none duration-100 after:duration-500 w-[120px] h-8 bg-blue-300 after:content-['Online'] after:absolute after:outline-none after:rounded-full after:h-6 after:w-14 after:bg-white after:top-1 after:left-1 after:flex after:justify-center after:items-center after:text-sky-800 after:font-bold peer-checked:after:translate-x-14 peer-checked:after:content-['Offline'] peer-checked:after:border-white">
                                         </div>
                                     </label>
                                 </div>
+
+                                {/* {Offline && ( */}
+                                {/* Address, Pincode, City */}
+                                {formData.eventMode === 'offline' ? (
+
+                                    <>
+                                        <div className="mb-4 flex flex-row w-full gap-5">
+                                            <div className='w-1/2'>
+                                                <label htmlFor="city" className="block text-sm font-medium text-gray-600">
+                                                    City
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="city"
+                                                    name="city"
+                                                    value={formData.city}
+                                                    onChange={handleChange}
+                                                    className="mt-1 p-2 border rounded-md w-full bg-slate-100"
+                                                />
+                                            </div>
+                                            <div className='w-1/2'>
+                                                <label htmlFor="pincode" className="block text-sm font-medium text-gray-600">
+                                                    Pincode
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="pincode"
+                                                    name="pincode"
+                                                    value={formData.pincode}
+                                                    onChange={handleChange}
+                                                    className="mt-1 p-2 w-full border rounded-md bg-slate-100"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label htmlFor="address" className="block text-sm font-medium text-gray-600">
+                                                Address
+                                            </label>
+                                            <textarea
+                                                type="text"
+                                                id="address"
+                                                name="address"
+                                                value={formData.address}
+                                                onChange={handleChange}
+                                                className="mt-1 p-2 w-full border rounded-md bg-slate-100"
+                                            />
+                                            {/* </div> */}
+                                        </div>
+                                    </>)
+                                    :
+                                    (
+                                        <div>
+                                            <label htmlFor="meetinglink" className="block text-sm font-medium text-gray-600">
+                                                Meeting Link
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="meetinglink"
+                                                name="meetinglink"
+                                                value={formData.address}
+                                                onChange={handleChange}
+                                                className="mt-1 p-2 w-full border rounded-md bg-slate-100"
+                                            />
+                                        </div>
+                                    )}
+
+
+                                {/* <div className="w-1/2"> */}
 
 
 
@@ -233,7 +266,7 @@ const Addevent = () => {
                                             value={formData.price}
                                             onChange={handleChange}
                                             placeholder="Price"
-                                            className="mt-3 p-2 w-full border rounded-md"
+                                            className="mt-3 p-2 w-full border rounded-md bg-slate-100"
                                         />
                                     )}
                                 </div>
