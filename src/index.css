@@ -5,3 +5,15 @@
 .rr{
     border-radius: 35px;
 }
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #6b6b6b;
+    border-radius: 10px;
+  }
