@@ -16,6 +16,10 @@ import Addevent from "./Components/Forms/Addevent";
 // import EventProfile from "./Pages/Eventprofile/EventProfile";
 import EventProfile from "./Pages/Eventprofile/Eventprofile1";
 import Private from "./Private/Private";
+
+import Video from "./Pages/Zego/Video";
+import Room from "./Pages/Zego/Room";
+
 import Chatbot from "./Components/AiBot/ChatBot";
 import OrganizationDetail from "./Pages/OrganizationDetail/OrganizationDetail";
 import Poll from "./Pages/Polling/Poll";
@@ -40,7 +44,12 @@ const App = () => {
            
             <Route path="/register" element={<Register />} />
 
+            <Route path="/login" element={<Login />} />
+
+
+
             <Route path="library" element={<Library />} />
+
           
             {/* PRIVATE ROUTES BELOW THIS */}
 
@@ -52,7 +61,12 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/addevent" element={<Addevent />} />
+
+            <Route path="/video" element={<Video />} />
+            <Route path="/room/:roomId" element={<Room />} />
+
             <Route path="/polls" element={<Poll />} />
+
 
 
           </Route>
