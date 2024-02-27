@@ -13,6 +13,8 @@ import Home from "./Pages/Home/Home";
 import Forum from "./Pages/Forum/Forum";
 import GrpChat from "./Pages/Communities/Chat";
 import Addevent from "./Components/Forms/Addevent";
+// import EventProfile from "./Pages/Eventprofile/EventProfile";
+import EventProfile from "./Pages/Eventprofile/Eventprofile1";
 import Private from "./Private/Private";
 
 
