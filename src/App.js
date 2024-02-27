@@ -13,6 +13,8 @@ import Home from "./Pages/Home/Home";
 import Forum from "./Pages/Forum/Forum";
 import GrpChat from "./Pages/Communities/Chat";
 import Addevent from "./Components/Forms/Addevent";
+// import EventProfile from "./Pages/Eventprofile/EventProfile";
+import EventProfile from "./Pages/Eventprofile/Eventprofile1";
 
 const App = () => {
   return (
@@ -30,6 +32,7 @@ const App = () => {
             <Route path="/chat" element={<GrpChat />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/eventprofile" element={<EventProfile />} />
             <Route path="/home" element={<Home />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/addevent" element={<Addevent />} />
