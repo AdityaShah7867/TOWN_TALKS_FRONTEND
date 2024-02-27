@@ -21,7 +21,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='bg-gray-100 p-12 min-h-screen font-sans'>
+    <div className='bg-gray-100 p-12 min-h-screen overflow-hid font-sans'>
       <div>
         
         <p className='text-3xl font-bold ml-8'>FIND EVENTS</p>
