@@ -15,30 +15,27 @@ import Forum from "./Pages/Forum/Forum";
 const App = () => {
   return (
     <>
-    <Router>
-      <>
-        <Navbar />
+      <Router>
+        <>
+          <Navbar />
 
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/docs" element={<Document />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/forum" element={<Forum />} />
-          {/* PRIVATE ROUTES BELOW THIS */}
-          {/* <Route path="/" element={<Private />}>
-            <Route path="/editcustomer" element={<CustomerEdiit />} />
-          </Route> */}
+          <ToastContainer />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/docs" element={<Document />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/forum" element={<Forum />} />
 
-          
-        </Routes>
-     </>
-    </Router>
-  </>
+
+
+          </Routes>
+        </>
+      </Router>
+    </>
   )
 }
 
