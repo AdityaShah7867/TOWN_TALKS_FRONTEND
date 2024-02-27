@@ -5,7 +5,6 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
-import PieChart from "../../Components/Chart/Piechart";
 
 
 function Dashboard() {
