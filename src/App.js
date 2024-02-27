@@ -17,32 +17,32 @@ import Addevent from "./Components/Forms/Addevent";
 const App = () => {
   return (
     <>
-    <Router>
-      <>
-        <Navbar />
+      <Router>
+        <>
+          <Navbar />
 
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/docs" element={<Document />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/chat" element={<GrpChat />} />  
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/forum" element={<Forum />} />
-          <Route path="/addevent" element={<Addevent />} />
-          {/* PRIVATE ROUTES BELOW THIS */}
-          {/* <Route path="/" element={<Private />}>
+          <ToastContainer />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/docs" element={<Document />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/chat" element={<GrpChat />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/addevent" element={<Addevent />} />
+            {/* PRIVATE ROUTES BELOW THIS */}
+            {/* <Route path="/" element={<Private />}>
             <Route path="/editcustomer" element={<CustomerEdiit />} />
           </Route> */}
 
-          
-        </Routes>
-     </>
-    </Router>
-  </>
+
+          </Routes>
+        </>
+      </Router>
+    </>
   )
 }
 
