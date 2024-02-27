@@ -6,11 +6,12 @@ import SuggestedEvents from "../../Components/Forum/SuggestedEvents";
 const Forum = () => {
 
   const [forums, setForums] = useState([]);
+  const [getForum, setGetForum] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("auth");
 
         const response = await fetch("http://localhost:4000/api/forum/getforums", {
           method: "GET",
@@ -22,9 +23,9 @@ const Forum = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setForums(data.forums); 
+          setForums(data.forums);
         } else {
-          
+
           console.error("Failed to fetch data");
         }
       } catch (error) {
@@ -33,7 +34,7 @@ const Forum = () => {
     };
 
     fetchData();
-  }, []); 
+  }, [getForum]);
 
 
 
@@ -45,8 +46,8 @@ const Forum = () => {
         <div class="md:w-3/4">
           <div className="flex justify-center items-center ">
             <div className=" w-full p-2 md:w-2/3">
-              <Post />
-              <PostCard className="mt-12" forums={forums}/>
+              <Post setGetForum={setGetForum} />
+              <PostCard className="mt-12" forums={forums} />
             </div>
           </div>
         </div>
