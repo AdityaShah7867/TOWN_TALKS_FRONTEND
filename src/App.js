@@ -27,7 +27,7 @@ const App = () => {
             <Route path="/docs" element={<Document />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/chat" element={<GrpChat />} />
+            <Route path="/chat/:communityId" element={<GrpChat />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/home" element={<Home />} />

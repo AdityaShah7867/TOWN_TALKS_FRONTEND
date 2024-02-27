@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEvent } from "../../Context/EventContext";
 
 const EventCard = ({ event }) => {
+
+
+    const navigate = useNavigate();
+    const { user } = useAuth()
+    const { fetchEvents } = useEvent();
     const joinEvent = async () => {
         const response = await axios.post(
-            `http://localhost:4000/api/event/join-event/${event._id}`,
+            `http://localhost:4000/api/event/join-event/${event?._id}`,
             {},
             {
                 headers: {
@@ -14,6 +23,21 @@ const EventCard = ({ event }) => {
         );
 
         console.log(response);
+
+        if (response.status === 200) {
+            toast.success("You have joined the event");
+            fetchEvents()
+        } else {
+            toast.error("Failed to join event");
+        }
+    };
+
+    const handleCommunity = () => {
+        if (event.communityId) {
+            navigate(`/chat/${event.communityId}`)
+        } else {
+            toast.error('No community found')
+        }
     };
 
     function formatDateTime(dateTimeString) {
@@ -33,6 +57,11 @@ const EventCard = ({ event }) => {
 
         return formattedDate;
     }
+
+    useEffect(() => {
+        console.log(user)
+        event.participants.includes(user?.id) ? console.log('user is in the event') : console.log('user is not in the event')
+    }, [event])
 
     return (
         <div className="font-['inter_var'] font-semibold rounded-2xl border  shadow-orange-950">
@@ -75,9 +104,31 @@ const EventCard = ({ event }) => {
                 </div>
                 <div className="flex justify-between mt-4">
                     <div>
-                        {/* {
-                            event.participants.includes()
-                       } */}
+                        {
+                            event.participants.includes(user?._id) ? (
+                                <>
+                                    <button
+                                        onClick={joinEvent}
+                                        className="bg-red-500 text-white p-2 rounded-lg font-sans"
+                                    >
+                                        leave
+                                    </button>
+
+                                    <button
+                                        onClick={handleCommunity}
+                                        className="bg-red-500 text-white p-2 rounded-lg font-sans ml-4"
+                                    >
+                                        View Community
+                                    </button></>
+                            ) : (
+                                <button
+                                    onClick={joinEvent}
+                                    className="bg-green-500 text-white p-2 rounded-lg"
+                                >
+                                    Join
+                                </button>
+                            )
+                        }
                     </div>
                     <div className="flex ">
                         <img
