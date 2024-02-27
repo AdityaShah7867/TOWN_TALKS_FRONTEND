@@ -16,6 +16,8 @@ import Addevent from "./Components/Forms/Addevent";
 // import EventProfile from "./Pages/Eventprofile/EventProfile";
 import EventProfile from "./Pages/Eventprofile/Eventprofile1";
 import Private from "./Private/Private";
+import Video from "./Pages/Zego/Video";
+import Room from "./Pages/Zego/Room";
 
 
 const App = () => {
@@ -31,17 +33,21 @@ const App = () => {
             <Route path="/docs" element={<Document />} />
            
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+
           
             {/* PRIVATE ROUTES BELOW THIS */}
 
           <Route path="/" element={<Private />}>
           <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/chat/:communityId" element={<GrpChat />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/addevent" element={<Addevent />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/room/:roomId" element={<Room />} />
+
           </Route>
 
 
