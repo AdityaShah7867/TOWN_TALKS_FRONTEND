@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Card from './Card';
 import { FaRegImage } from "react-icons/fa6";
+import { toast } from 'react-toastify'
 
 
-const Post = () => {
+
+const Post = ({ setGetForum }) => {
+
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [imageAddmodel, setImageAddmodel] = useState(false);
 
@@ -14,9 +17,9 @@ const Post = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        
-        const token = localStorage.getItem('token');
-    
+
+        const token = localStorage.getItem('auth');
+
         try {
             const response = await fetch('http://localhost:4000/api/forum/createforum', {
                 method: 'POST',
@@ -25,16 +28,20 @@ const Post = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-    
+
             if (response.ok) {
-                
-                console.log('Forum post created successfully');
+
+                toast.success('Forum post created successfully');
+                setGetForum(true);
             } else {
-               
-                console.error('Error creating forum post');
+                console.error('Failed to create forum post');
+                toast.error('Failed to create forum post');
             }
+
+
         } catch (error) {
             console.error('Error creating forum post:', error);
+            toast.error('Error creating forum post');
         }
     };
 
