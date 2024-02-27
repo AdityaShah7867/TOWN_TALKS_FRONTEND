@@ -51,26 +51,22 @@ const App = () => {
 
             <Route path="library" element={<Library />} />
 
-       
+
             {/* PRIVATE ROUTES BELOW THIS */}
 
-          <Route path="/" element={<Private />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/chat/:communityId" element={<GrpChat />} />
-            <Route path="organization/:id" element={<OrganizationDetail />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/addevent" element={<Addevent />} />
-
-            <Route path="/video" element={<Video />} />
-            <Route path="/room/:roomId" element={<Room />} />
-
-            <Route path="/polls" element={<Poll />} />
-
-
-
-          </Route>
+            <Route path="/" element={<Private />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/chat/:communityId" element={<GrpChat />} />
+              <Route path="organization/:id" element={<OrganizationDetail />} />
+              <Route path="/Home" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/addevent" element={<Addevent />} />
+              <Route path="/video" element={<Video />} />
+              <Route path="/room/:roomId" element={<Room />} />
+              <Route path="/polls" element={<Poll />} />
+              <Route path="/home/:eventId" element={<EventProfile />} />
+            </Route>
 
 
 
