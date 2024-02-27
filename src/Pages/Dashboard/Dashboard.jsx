@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Chart from "../../Components/Chart/Chart";
+import PieChart from "../../Components/Chart/Piechart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
