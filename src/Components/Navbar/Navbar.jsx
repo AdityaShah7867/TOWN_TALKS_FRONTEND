@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import logo from '../../Assets/Images/logo1.png'; // Import logo image
 
 const Navbar = () => {
   return (
@@ -9,7 +10,9 @@ const Navbar = () => {
           {/* Left side: Logo */}
           <div className="flex-shrink-0">
             {/* Use Link instead of anchor tag */}
-            <Link to="/" className="text-white text-lg font-semibold">LOGO</Link>
+            <Link to="/" className="text-white text-lg font-semibold">
+              <img src={logo} alt="" style={{width:'125px'}} />
+            </Link>
           </div>
           {/* Right side: Links */}
           <div className="hidden md:block">

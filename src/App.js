@@ -62,6 +62,7 @@ const App = () => {
             <Route path="/chat/:communityId" element={<GrpChat />} />
             <Route path="organization/:id" element={<OrganizationDetail />} />
             <Route path="/Home" element={<Home />} />
+            <Route path="/home/:eventId" element={<EventProfile />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/addevent" element={<Addevent />} />
