@@ -3,7 +3,7 @@ import React from 'react'
 const search = () => {
   return (
     <div>
-        <form class="max-w-md  p-4">
+        <form class=" min-w-96 justify-center  p-4">
         <label
           for="default-search"
           class="mb-2 text-sm font-medium text-gray-900 sr-only "
@@ -11,7 +11,7 @@ const search = () => {
           Search
         </label>
         <div class="relative mt-4">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <div class="absolute inset-y-0 start-0 flex gap-8 items-center ps-3 pointer-events-none">
             <svg
               class="w-4 h-4 text-gray-500 "
               aria-hidden="true"

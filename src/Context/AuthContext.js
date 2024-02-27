@@ -2,11 +2,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+
 
     useEffect(() => {
         console.log(token)
@@ -31,6 +33,7 @@ const AuthProvider = ({ children }) => {
         , []);
 
     const login = async (email, password) => {
+
         try {
             const response = await axios.post('http://localhost:4000/api/user/login', { email, password });
             setUser(response.data.user);
