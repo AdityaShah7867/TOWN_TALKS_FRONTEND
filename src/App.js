@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,12 +31,12 @@ const App = () => {
             <Route path="/docs" element={<Document />} />
            
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
           
             {/* PRIVATE ROUTES BELOW THIS */}
 
           <Route path="/" element={<Private />}>
           <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/chat/:communityId" element={<GrpChat />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />

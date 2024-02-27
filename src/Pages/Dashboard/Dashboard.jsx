@@ -1,77 +1,74 @@
 import React, { useEffect } from "react";
 import Chart from "../../Components/Chart/Chart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
+
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
-
+import PieChart from "../../Components/Chart/Piechart";
 
 function Dashboard() {
-
-
-
-  const [events, setEvents] = useState([])
-
+  const [events, setEvents] = useState([]);
 
   const getEventByUserId = async () => {
-    const response = await axios.get('http://localhost:4000/api/event/get-event-by-user-id', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('auth')}`
+    const response = await axios.get(
+      "http://localhost:4000/api/event/get-event-by-user-id",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+        },
       }
-    })
+    );
 
     if (response.status === 200) {
-      console.log(response.data)
-      setEvents(response.data)
+      console.log(response.data);
+      setEvents(response.data);
     }
-  }
+  };
 
   useEffect(() => {
-    getEventByUserId()
-  }, [])
+    getEventByUserId();
+  }, []);
 
-  const [pieChartData, setPieChartData] = useState([])
-  const [avarageRating, setAvarageRating] = useState(0.0)
+  const [pieChartData, setPieChartData] = useState([]);
+  const [avarageRating, setAvarageRating] = useState(0.0);
 
   const fetchPieChartdata = async () => {
     try {
-
-      const response = await axios.get('http://localhost:4000/api/feedback/get-feedback-data-for-piechart', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('auth')}`
+      const response = await axios.get(
+        "http://localhost:4000/api/feedback/get-feedback-data-for-piechart",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth")}`,
+          },
         }
-      })
+      );
 
       if (response.status === 200) {
-        setPieChartData(response.data.ratings)
-        setAvarageRating(response.data.meanRating)
-        console.log(response.data.ratings)
-
+        setPieChartData(response.data.ratings);
+        setAvarageRating(response.data.meanRating);
+        console.log(response.data.ratings);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchPieChartdata()
-  }, [])
+    fetchPieChartdata();
+  }, []);
 
   let chartData = [];
 
-
   pieChartData.forEach((item, index) => {
-    chartData.push(item.value)
-  })
+    chartData.push(item.value);
+  });
 
   let chartCategories = [];
 
   pieChartData.forEach((item, index) => {
-    chartCategories.push(item.label)
-  }
-  )
-
-
+    chartCategories.push(item.label);
+  });
 
   return (
     <div className="flex">
@@ -80,26 +77,27 @@ function Dashboard() {
         <h2>Dashboard</h2>
 
         <div className="flex space-x-8 py-6">
-          {
-            events.map(event => (
-              <div key={event._id} className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center">
-                <h2>{event.title}</h2>
-                <li className="text-gray-500 mt-3">{event.description}</li>
-              </div>
-            ))
-          }
+          {events.map((event) => (
+            <div
+              key={event._id}
+              className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center"
+            >
+              <h2>{event.title}</h2>
+              <li className="text-gray-500 mt-3">{event.description}</li>
+            </div>
+          ))}
         </div>
         <div className="flex space-x-8 py-6 w-4/5">
           <div className="flex flex-col rounded-md border w-full p-8 justify-center">
-
             <h2 className="text-black font-bold text-sans">Event Analytics </h2>
             <div className="flex  gap-14">
               <PieChart data={pieChartData} />
               <ColumnChart data={chartData} categories={chartCategories} />
             </div>
             {/* <Chart /> */}
-            <h2 className="text-black font-bold text-sans">Average Rating: {avarageRating}</h2>
-
+            <h2 className="text-black font-bold text-sans">
+              Average Rating: {avarageRating}
+            </h2>
           </div>
         </div>
         <div className="flex space-x-8 py-6">
