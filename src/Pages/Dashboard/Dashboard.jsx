@@ -36,7 +36,7 @@ function Dashboard() {
             Expenses Graph
             <PieChart data={pieChartData} />
             <ColumnChart data={chartData} categories={chartCategories} />
-            <Chart />
+            {/* <Chart /> */}
           </div>
         </div>
         <div className="flex space-x-8 py-6">
