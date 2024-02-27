@@ -3,7 +3,10 @@ import Card from './Card';
 import { FaRegImage } from "react-icons/fa6";
 import { toast } from 'react-toastify'
 
+
+
 const Post = ({ setGetForum }) => {
+
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [imageAddmodel, setImageAddmodel] = useState(false);
 

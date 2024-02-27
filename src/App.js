@@ -13,6 +13,10 @@ import Home from "./Pages/Home/Home";
 import Forum from "./Pages/Forum/Forum";
 import GrpChat from "./Pages/Communities/Chat";
 import Addevent from "./Components/Forms/Addevent";
+// import EventProfile from "./Pages/Eventprofile/EventProfile";
+import EventProfile from "./Pages/Eventprofile/Eventprofile1";
+import Private from "./Private/Private";
+
 
 const App = () => {
   return (
@@ -25,18 +29,20 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/docs" element={<Document />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+           
+            <Route path="/register" element={<Register />} />
+          
+            {/* PRIVATE ROUTES BELOW THIS */}
+
+          <Route path="/" element={<Private />}>
+          <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/chat/:communityId" element={<GrpChat />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/Home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/home" element={<Home />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/addevent" element={<Addevent />} />
-            {/* PRIVATE ROUTES BELOW THIS */}
-            {/* <Route path="/" element={<Private />}>
-            <Route path="/editcustomer" element={<CustomerEdiit />} />
-          </Route> */}
+          </Route>
 
 
           </Routes>

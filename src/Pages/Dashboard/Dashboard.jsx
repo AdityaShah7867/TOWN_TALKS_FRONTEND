@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import Chart from "../../Components/Chart/Chart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import PieChart from "../../Components/Chart/Piechart";
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
 
 
 function Dashboard() {
+
 
 
   const [events, setEvents] = useState([])
@@ -72,6 +72,7 @@ function Dashboard() {
   )
 
 
+
   return (
     <div className="flex">
       <Sidebar />
@@ -90,6 +91,7 @@ function Dashboard() {
         </div>
         <div className="flex space-x-8 py-6 w-4/5">
           <div className="flex flex-col rounded-md border w-full p-8 justify-center">
+
             <h2 className="text-black font-bold text-sans">Event Analytics </h2>
             <div className="flex  gap-14">
               <PieChart data={pieChartData} />
@@ -97,6 +99,7 @@ function Dashboard() {
             </div>
             {/* <Chart /> */}
             <h2 className="text-black font-bold text-sans">Average Rating: {avarageRating}</h2>
+
           </div>
         </div>
         <div className="flex space-x-8 py-6">
