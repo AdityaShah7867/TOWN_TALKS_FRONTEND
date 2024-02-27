@@ -41,8 +41,9 @@ const App = () => {
             <Route path="/login" element={<Login />} />
 
             <Route path="/docs" element={<Document />} />
-           
+
             <Route path="/register" element={<Register />} />
+
 
             <Route path="/login" element={<Login />} />
 
@@ -50,7 +51,7 @@ const App = () => {
 
             <Route path="library" element={<Library />} />
 
-          
+       
             {/* PRIVATE ROUTES BELOW THIS */}
 
           <Route path="/" element={<Private />}>
@@ -70,6 +71,7 @@ const App = () => {
 
 
           </Route>
+
 
 
           </Routes>
