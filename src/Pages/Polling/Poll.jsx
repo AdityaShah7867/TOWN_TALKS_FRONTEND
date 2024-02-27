@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify'
+import { useNavigate } from "react-router-dom";
 
 const Poll = () => {
+  const navigate = useNavigate();
 
   const [currentPoll, setCurrentPoll] = useState({});
 
@@ -40,6 +42,7 @@ const Poll = () => {
     if (response.status === 200) {
       console.log(response.data)
       toast.success('Poll answered')
+      navigate("/forum");
     }
 
   }

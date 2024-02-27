@@ -40,11 +40,12 @@ function Navbar() {
         onClick={() => setIsExpanded(!isExpanded)}
         className="cursor-pointer absolute -right-3 top-10 rounded-full w-6 h-6 bg-[#FF8C8C] flex justify-center items-center"
       >
-        <img src="" className="w-2" />
+        <FaArrowLeft />
+
       </div>
       <div className="logo-div flex space-x-4 items-center">
         <FaArrowLeft />
-        <span className={!isExpanded ? "hidden" : "block"}>Money Tracker</span>
+        <span className={!isExpanded ? "hidden" : "block"}>Profile</span>
       </div>
       <div className="flex flex-col space-y-8 mt-12">
         <div className="nav-links w-full">
