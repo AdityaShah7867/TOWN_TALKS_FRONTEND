@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import Search from '../../Components/Search/Search'
+// import Search from '../../Components/Search/Search'
 import EventCard from '../../Components/Cards/EventCard'
 import { useEvent } from '../../Context/EventContext'
 import { useState } from 'react'
 import Multi from '../../Components/Multi/Multi'
+import Search from '../../Components/Multi/Search'
 
 const Home = () => {
   const [events, setEvents] = useState([])
@@ -29,7 +30,9 @@ const Home = () => {
       <div>
 
         <p className='text-3xl font-bold ml-8'>FIND EVENTS</p>
-        <Multi searchText={searchText} setSearchText={setSearchText} />
+        {/* <Multi searchText={searchText} setSearchText={setSearchText} /> */}
+
+        <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
       <div className=' mx-20  flex flex-wrap gap-8 mt-4'>
         {
