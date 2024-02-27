@@ -1,7 +1,20 @@
 import React from "react";
 import Chart from "../../Components/Chart/Chart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
+import PieChart from "../../Components/Chart/Piechart";
+import ColumnChart from "../../Components/Chart/Columnchart";
+
 function Dashboard() {
+  const pieChartData = [
+    { label: 'Category 1', value: 30 },
+    { label: 'Category 2', value: 40 },
+    { label: 'Category 3', value: 20 },
+    { label: 'Category 4', value: 10 },
+  ];
+  const chartData = [30, 40, 45, 50, 49, 60, 70, 91, 125];
+  const chartCategories = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5', 'Category 6', 'Category 7', 'Category 8', 'Category 9'];
+
+
   return (
     <div className="flex">
       <Sidebar />
@@ -21,6 +34,8 @@ function Dashboard() {
         <div className="flex space-x-8 py-6 w-4/5">
           <div className="flex flex-col rounded-md border w-full p-8 justify-center">
             Expenses Graph
+            <PieChart data={pieChartData} />
+            <ColumnChart data={chartData} categories={chartCategories} />
             <Chart />
           </div>
         </div>
