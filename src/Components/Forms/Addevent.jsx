@@ -3,6 +3,7 @@ import bg from '../../Assets/Images/b.avif'
 import bg1 from '../../Assets/Images/bg1.jpg'
 import b1 from '../../Assets/Images/b.jpg'
 import b2 from '../../Assets/Images/back.jpg'
+import axios from 'axios'
 
 const Addevent = () => {
     const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const Addevent = () => {
         paid: false,
         price: '',
         meetinglink: '',
-        image: null,
+        eventImage: null,
     });
 
     const [Offline, setOffline] = useState("False")
@@ -63,10 +64,18 @@ const Addevent = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/event/create-event', {
-                method: 'POST',
-                body: formDataToSend,
+            const response = await axios.post('http://localhost:4000/api/event/create-event', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${localStorage.getItem('auth')}`,
+                },
             });
+
+
+            if (response.status === 200) {
+                console.log('Event created successfully')
+            }
+
 
             // Handle response as needed
             console.log('Form submitted successfully', formData);
@@ -153,14 +162,14 @@ const Addevent = () => {
                                     </div>
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="image" className="block text-sm font-medium text-gray-600">
+                                    <label htmlFor="eventImage" className="block text-sm font-medium text-gray-600">
                                         Image
                                     </label>
                                     <div className='bg-slate-100 h-12 flex justify-center items-center rounded-md'>
                                         <input
                                             type="file"
-                                            id="image"
-                                            name="image"
+                                            id="eventImage"
+                                            name="eventImage"
                                             accept="image/*"
                                             onChange={handleChange}
                                             className="mt-1"
@@ -249,7 +258,7 @@ const Addevent = () => {
                                                 type="text"
                                                 id="meetinglink"
                                                 name="meetinglink"
-                                                value={formData.address}
+                                                value={formData.meetinglink}
                                                 onChange={handleChange}
                                                 className="mt-1 p-2 w-full border rounded-md bg-slate-100"
                                             />
