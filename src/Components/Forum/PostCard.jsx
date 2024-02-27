@@ -25,8 +25,9 @@ const PostCard = () => {
       <div className="mt-4 p-2">Some great text message</div>
       <div>
         <img
-          src="https://st.depositphotos.com/2274151/4841/i/450/depositphotos_48410095-stock-photo-sample-blue-square-grungy-stamp.jpg"
+          src="https://www.livelaw.in/h-upload/2021/01/21/750x450_387889-swachh-bharat-live-law-.jpg"
           alt=""
+          className="max-w-52"
         />
       </div>
       <div className="flex justify-between">
