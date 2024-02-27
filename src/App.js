@@ -29,20 +29,21 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/docs" element={<Document />} />
-           
+
             <Route path="/register" element={<Register />} />
-          
+
             {/* PRIVATE ROUTES BELOW THIS */}
 
-          <Route path="/" element={<Private />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/chat/:communityId" element={<GrpChat />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/addevent" element={<Addevent />} />
-          </Route>
+            <Route path="/" element={<Private />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/chat/:communityId" element={<GrpChat />} />
+              <Route path="/Home" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/addevent" element={<Addevent />} />
+              <Route path="/home/:eventId" element={<EventProfile />} />
+            </Route>
 
 
           </Routes>

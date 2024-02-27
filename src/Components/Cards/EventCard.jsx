@@ -73,7 +73,9 @@ const EventCard = ({ event }) => {
                     width: "500px",
                 }}
             >
-                <div>
+                <div onClick={() => {
+                    navigate(`/home/${event._id}`)
+                }}>
                     <img
                         src={
                             `http://localhost:4000/${event.image}` ||
@@ -84,23 +86,23 @@ const EventCard = ({ event }) => {
                     />
                 </div>
                 <div className="ml-4 mt-4 text-base flex flex-wrap">
-                <FaLocationDot /> &nbsp; {event.address}
+                    <FaLocationDot /> &nbsp; {event.address}
                 </div>
 
                 <div className="text-2xl p-2">
                     {event.title}
                 </div>
                 <div className="ml-2 text-xl text-gray-500 font-sans">{event.description}</div>
-               
+
                 <div className="flex justify-between mt-2">
                     <div className=" ml-2 font-sans">
                         <p>{formatDateTime(event.startDate)}</p>
                     </div>
                 </div>
                 <div className="mt-4 font-semibold text-xl font-sans">
-                    
+
                 </div>
-                
+
 
                 <div className="mt-8 ml-2 mb-8 ">
                     <span className="h-12 bg-gray-200 p-2 rounded-xl font-sans">

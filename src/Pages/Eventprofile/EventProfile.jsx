@@ -1,7 +1,28 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 const EventProfile = () => {
-  // Example event data (replace with your actual data)
+
+  const { eventId } = useParams();
+
+  const [event, setEvent] = useState({})
+
+  const fetchEventById = async () => {
+    try {
+      const response = await axios.get(`http://localhost:4000/api/event/get-event/65ddb0a1a4c095cd55028fd5`)
+      if (response.status === 200) {
+        setEvent(response.data)
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchEventById()
+  }, [eventId])
+
   const eventData = {
     title: 'Example Event',
     description: 'This is a sample event description.',
