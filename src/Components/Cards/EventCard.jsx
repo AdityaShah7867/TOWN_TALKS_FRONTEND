@@ -4,6 +4,8 @@ import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEvent } from "../../Context/EventContext";
+import { FaLocationDot } from "react-icons/fa6";
+
 
 const EventCard = ({ event }) => {
 
@@ -66,7 +68,7 @@ const EventCard = ({ event }) => {
     return (
         <div className="font-['inter_var'] font-semibold rounded-2xl border  shadow-orange-950">
             <div
-                className="bg-white p-6 max-w-96  rounded-2xl "
+                className="bg-white max-w-96  rounded-2xl "
                 style={{
                     width: "500px",
                 }}
@@ -77,32 +79,39 @@ const EventCard = ({ event }) => {
                             `http://localhost:4000/${event.image}` ||
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3nzdHxRZ_7w7JoH3dQlCi66ir4kP1a2JBuQ&usqp=CAU"
                         }
-                        className="rounded-xl max-h-60 max-w-full rr mt-4"
+                        className="rounded-tl-xl rounded-tr-xl max-h-60 w-96"
                         alt=""
                     />
                 </div>
-
-                <div className="flex justify-between mt-8">
-                    <div className=" font-sans">
-                        <p>{formatDateTime(event.startDate)}</p>
-                    </div>
-                    <div className="m-1 text-xs font-sans">{event.address}</div>
+                <div className="ml-4 mt-4 text-base flex flex-wrap">
+                <FaLocationDot /> &nbsp; {event.address}
                 </div>
-                <div className="mt-4 font-semibold text-xl font-sans">
+
+                <div className="text-2xl p-2">
                     {event.title}
                 </div>
-                <div className="mt-4  text-xl font-sans">{event.description}</div>
+                <div className="ml-2 text-xl text-gray-500 font-sans">{event.description}</div>
+               
+                <div className="flex justify-between mt-2">
+                    <div className=" ml-2 font-sans">
+                        <p>{formatDateTime(event.startDate)}</p>
+                    </div>
+                </div>
+                <div className="mt-4 font-semibold text-xl font-sans">
+                    
+                </div>
+                
 
-                <div className="mt-6 mb-8 ">
+                <div className="mt-8 ml-2 mb-8 ">
                     <span className="h-12 bg-gray-200 p-2 rounded-xl font-sans">
                         OFFLINE
                     </span>
                     <span className="h-12 ml-4 bg-gray-200 p-2 rounded-xl font-sans">
-                        PAID
+                        PAID {event.price}
                     </span>
-                    <span className="text-black font-lg font-bold ">{event.price}</span>
+                    <span className="text-black font-lg font-bold "></span>
                 </div>
-                <div className="flex justify-between mt-4">
+                <div className="flex justify-between p-4     mt-4">
                     <div>
                         {
                             event.participants.includes(user?._id) ? (
@@ -123,14 +132,14 @@ const EventCard = ({ event }) => {
                             ) : (
                                 <button
                                     onClick={joinEvent}
-                                    className="bg-green-500 text-white p-2 rounded-lg"
+                                    className="bg-green-500 text-white p-2 text-base rounded-lg"
                                 >
                                     Join
                                 </button>
                             )
                         }
                     </div>
-                    <div className="flex ">
+                    <div className="flex">
                         <img
                             src="https://avatars.githubusercontent.com/u/121731399?v=3"
                             className="rounded-full w-8 h-8"

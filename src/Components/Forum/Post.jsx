@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card';
 import { FaRegImage } from "react-icons/fa6";
 
+
 const Post = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [imageAddmodel, setImageAddmodel] = useState(false);
