@@ -12,8 +12,8 @@ const EventProvider = ({ children }) => {
     const fetchEvents = async () => {
         const response = await axios.get(`http://localhost:4000/api/event/events`, {
             headers: {
-                'auth-token': localStorage.getItem('auth')
-            }
+                authorization: `Bearer ${localStorage.getItem("auth")}`,
+            },
         })
 
         return response
