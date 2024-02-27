@@ -28,6 +28,23 @@ const Addevent = () => {
 
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
+        // Add constraints for startDateTime and endDateTime
+        if (name === 'startDateTime' || name === 'endDateTime') {
+            const currentDate = new Date();
+            const selectedDate = new Date(value);
+
+            // Check if the selected date is before the current date
+            if (selectedDate < currentDate) {
+                alert('Please select a date and time after the current date and time.');
+                return;
+            }
+
+            // Check if endDateTime is not before startDateTime
+            if (name === 'endDateTime' && selectedDate < new Date(formData.startDateTime)) {
+                alert('End date and time should be after the start date and time.');
+                return;
+            }
+        }
 
         setFormData((prevData) => ({
             ...prevData,
@@ -46,7 +63,7 @@ const Addevent = () => {
         }
 
         try {
-            const response = await fetch('your-api-endpoint', {
+            const response = await fetch('http://localhost:4000/api/event/create-event', {
                 method: 'POST',
                 body: formDataToSend,
             });
@@ -169,7 +186,7 @@ const Addevent = () => {
                                             }
                                             className="sr-only peer"
                                         />
-                                        <div className="peer rounded-full outline-none duration-100 after:duration-500 w-[120px] h-8 bg-blue-300 after:content-['Online'] after:absolute after:outline-none after:rounded-full after:h-6 after:w-14 after:bg-white after:top-1 after:left-1 after:flex after:justify-center after:items-center after:text-sky-800 after:font-bold peer-checked:after:translate-x-14 peer-checked:after:content-['Offline'] peer-checked:after:border-white">
+                                        <div className="peer rounded-full outline-none duration-100 after:duration-500 -mt-0.5 w-[120px] h-8 bg-blue-300 after:content-['Online'] after:absolute after:outline-none after:rounded-full after:h-6 after:w-14 after:bg-white after:top-1 after:left-1 after:flex after:justify-center after:items-center after:text-sky-800 after:font-bold peer-checked:after:translate-x-14 peer-checked:after:content-['Offline'] peer-checked:after:border-white">
                                         </div>
                                     </label>
                                 </div>

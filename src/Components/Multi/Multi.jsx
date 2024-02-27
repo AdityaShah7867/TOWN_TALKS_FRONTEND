@@ -7,7 +7,7 @@ import Map from "./Map";
 const Multi = () => {
   return (
     <div>
-     
+
       <div className="flex flex-col md:flex-row">
 
         <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
@@ -19,12 +19,12 @@ const Multi = () => {
         <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
           <Type />
         </div>
-        
-         
-    
+
+
+
       </div>
       <div className="flex justify-center items-center mt-8">
-      <Map />
+        <Map />
       </div>
     </div>
   );

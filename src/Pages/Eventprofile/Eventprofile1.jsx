@@ -7,7 +7,85 @@ import bg1 from '../../Assets/Images/bg1.jpg'
 import b1 from '../../Assets/Images/b.jpg'
 import b2 from '../../Assets/Images/back.jpg'
 
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { useEffect } from 'react';
+import { toast } from 'react-toastify'
+
 const Eventprofile1 = () => {
+
+
+    const { eventId } = useParams();
+
+    const [event, setEvent] = useState({})
+    const [feedbacks, setFeedbacks] = useState([])
+
+    const [feedback, setFeedback] = useState({
+        rating: null,
+        experience: '',
+    });
+
+    const createFeedback = async () => {
+
+        const response = await axios.post(`http://localhost:4000/api/feedback/create-feedback/${eventId}`, {
+            rating: feedback.rating,
+            suggestion: feedback.experience,
+        }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('auth')}`
+            }
+        })
+
+        if (response.status === 200) {
+            console.log(response.data)
+            toast.success('Feedback created')
+        }
+        else {
+            toast.error('Failed to create feedback')
+        }
+
+    }
+
+    const fetchEventById = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/api/event/get-event/${eventId}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth')}`
+                }
+            })
+            if (response.status === 200) {
+                setEvent(response.data)
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    const getFeedBacksByEventyId = async () => {
+        const response = await axios.get(`http://localhost:4000/api/feedback/get-feedback-data-by-event-id/${eventId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('auth')}`
+            }
+        }
+        )
+        if (response.status === 200) {
+            console.log(response.data)
+            setFeedbacks(response.data)
+        }
+    }
+
+
+
+
+
+
+    useEffect(() => {
+        fetchEventById()
+        getFeedBacksByEventyId()
+
+    }, [eventId])
     const pieChartData = [
         { label: 'Category 1', value: 30 },
         { label: 'Category 2', value: 40 },
@@ -16,11 +94,8 @@ const Eventprofile1 = () => {
     ];
     const chartData = [30, 40, 45, 50, 49, 60, 70, 91, 125];
     const chartCategories = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5', 'Category 6', 'Category 7', 'Category 8', 'Category 9'];
-  
-    const [feedback, setFeedback] = useState({
-        rating: null,
-        experience: '',
-    });
+
+
 
     const handleRatingChange = (value) => {
         setFeedback({ ...feedback, rating: value });
@@ -32,21 +107,40 @@ const Eventprofile1 = () => {
 
     const handleSubmitFeedback = (event) => {
         event.preventDefault();
-        // Log feedback details
-        console.log('Feedback:', feedback);
-        // Add further logic here, such as sending feedback to a server, etc.
+
+
+        createFeedback();
     };
+
+    function formatDateTime(dateTimeString) {
+        const date = new Date(dateTimeString);
+
+        const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+        };
+        const formattedDate = date.toLocaleDateString("en-US", options);
+
+        return formattedDate;
+    }
+
 
     return (
         <div className='flex justify-center items-center origin-center pb-10'>
 
             <div className='w-3/4 flex flex-col justify-center self-center bg-gray-50'>
                 <div className='flex flex-col lg:flex-row justify-center gap-5 items-center  h-screen'>
-                    <img src="https://source.unsplash.com/random" alt="" className='w-2/3 h-4/5 rounded-3xl' />
+                    <img src={'http://localhost:4000/' + event.image} alt="" className='w-2/3 h-4/5 rounded-3xl' />
                     <div className='w-1/3  flex flex-row overflow-scroll lg:flex-col lg:gap-6  '>
-                        <img src="https://source.unsplash.com/random" alt="" className='rounded-2xl h-48' />
-                        <img src="https://source.unsplash.com/random" alt="" className='rounded-2xl h-48' />
-                        <img src="https://source.unsplash.com/random" alt="" className='rounded-2xl h-48' />
+                        <img src={'http://localhost:4000/' + event.image} alt="" className='rounded-2xl h-48' />
+                        <img src={'http://localhost:4000/' + event.image} alt="" className='rounded-2xl h-48' />
+                        <img src={'http://localhost:4000/' + event.image} alt="" className='rounded-2xl h-48' />
                     </div>
                 </div>
                 <div className='flex flex-row -mt-8'>
@@ -58,13 +152,24 @@ const Eventprofile1 = () => {
                             Adding sliders to your site is no longer difficult. You don’t have to know coding anymore. Just use a slider widget and it will automatically insert the slider on your web page.
                             So, the Elementor slider would be a great tool to work with when building a WordPress site</p>
                         <div className='flex flex-row gap-5 font-medium text-lg mt-2'>
-                            <p className=''> Start Date: 12/12/23</p>
-                            <p className=''> End Date: 15/12/23</p>
+                            <p className=''> Start Date: {formatDateTime(event.startDate)}</p>
+                            <p className=''> End Date:  {formatDateTime(event.endDate)}</p>
                         </div>
-                        <p className=' font-medium text-lg mt-4'> No of Registrations:450</p>
-                        <PieChart data={pieChartData} />
-                        <ColumnChart data={chartData} categories={chartCategories} />
+                        <p className=' font-medium text-lg mt-4'> No of Registrations:{event?.participants?.length}</p>
+                        {/* <PieChart data={pieChartData} />
+                        <ColumnChart data={chartData} categories={chartCategories} /> */}
 
+                        {
+                            feedbacks.map(feedback => (
+                                <div key={feedback._id} className='flex flex-col gap-2 p-2 border-2 rounded-md mt-4'>
+                                    <p className='font-semibold text-xl'>User: {feedback.userId.username}</p>
+                                    <p className='font-medium text-lg'>Comment: {feedback.suggestion}</p>
+                                    <p className='font-medium text-lg'>Rating: {feedback.rating}</p>
+                                </div>
+                            ))
+
+
+                        }
 
                     </div>
                     <div className='w-1/3 justify-center  items-center p-4'>
