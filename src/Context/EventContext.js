@@ -19,6 +19,7 @@ const EventProvider = ({ children }) => {
         return response
     }
 
+
     return (
         <EventContext.Provider value={{ fetchEvents }}>
             {children}

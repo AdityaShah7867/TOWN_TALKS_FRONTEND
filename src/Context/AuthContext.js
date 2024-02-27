@@ -8,10 +8,27 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
 
-
     useEffect(() => {
         console.log(token)
     }, [token])
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/user/getUser', {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem("auth")}`,
+                    },
+                });
+                setUser(response.data.data);
+
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        checkAuth();
+    }
+        , []);
 
     const login = async (email, password) => {
         try {
