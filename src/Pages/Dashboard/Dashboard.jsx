@@ -1,12 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Chart from "../../Components/Chart/Chart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import ColumnChart from "../../Components/Chart/Columnchart";
+import axios from "axios";
+import { useState } from "react";
+
 
 function Dashboard() {
- 
-  const chartData = [30, 40, 45, 50, 49, 60, 70, 91, 125];
-  const chartCategories = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5', 'Category 6', 'Category 7', 'Category 8', 'Category 9'];
+
+
+
+  const [events, setEvents] = useState([])
+
+
+  const getEventByUserId = async () => {
+    const response = await axios.get('http://localhost:4000/api/event/get-event-by-user-id', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth')}`
+      }
+    })
+
+    if (response.status === 200) {
+      console.log(response.data)
+      setEvents(response.data)
+    }
+  }
+
+  useEffect(() => {
+    getEventByUserId()
+  }, [])
+
+  const [pieChartData, setPieChartData] = useState([])
+  const [avarageRating, setAvarageRating] = useState(0.0)
+
+  const fetchPieChartdata = async () => {
+    try {
+
+      const response = await axios.get('http://localhost:4000/api/feedback/get-feedback-data-for-piechart', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth')}`
+        }
+      })
+
+      if (response.status === 200) {
+        setPieChartData(response.data.ratings)
+        setAvarageRating(response.data.meanRating)
+        console.log(response.data.ratings)
+
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchPieChartdata()
+  }, [])
+
+  let chartData = [];
+
+
+  pieChartData.forEach((item, index) => {
+    chartData.push(item.value)
+  })
+
+  let chartCategories = [];
+
+  pieChartData.forEach((item, index) => {
+    chartCategories.push(item.label)
+  }
+  )
+
 
 
   return (
@@ -16,20 +80,26 @@ function Dashboard() {
         <h2>Dashboard</h2>
 
         <div className="flex space-x-8 py-6">
-          <div className="flex flex-col rounded-md border w-[400px] h-[150px] p-8 justify-center">
-            <h2>Yatharth Verma</h2>
-            <p className="text-gray-500 mt-3">Your Expenses: Rs10000</p>
-          </div>
-          <div className="flex flex-col rounded-md border w-[400px] h-[150px] p-8 justify-center">
-            <h2>Yatharth Verma</h2>
-            <p className="text-gray-500 mt-3">Your Savings: Rs100000</p>
-          </div>
+          {
+            events.map(event => (
+              <div key={event._id} className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center">
+                <h2>{event.title}</h2>
+                <li className="text-gray-500 mt-3">{event.description}</li>
+              </div>
+            ))
+          }
         </div>
         <div className="flex space-x-8 py-6 w-4/5">
           <div className="flex flex-col rounded-md border w-full p-8 justify-center">
-            Expenses Graph
-            <ColumnChart data={chartData} categories={chartCategories} />
-            <Chart />
+
+            <h2 className="text-black font-bold text-sans">Event Analytics </h2>
+            <div className="flex  gap-14">
+              <PieChart data={pieChartData} />
+              <ColumnChart data={chartData} categories={chartCategories} />
+            </div>
+            {/* <Chart /> */}
+            <h2 className="text-black font-bold text-sans">Average Rating: {avarageRating}</h2>
+
           </div>
         </div>
         <div className="flex space-x-8 py-6">
