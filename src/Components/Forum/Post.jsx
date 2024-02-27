@@ -10,10 +10,37 @@ const Post = () => {
         setImageAddmodel(!imageAddmodel);
     };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        
+        const token = localStorage.getItem('token');
+    
+        try {
+            const response = await fetch('http://localhost:4000/api/forum/createforum', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            if (response.ok) {
+                
+                console.log('Forum post created successfully');
+            } else {
+               
+                console.error('Error creating forum post');
+            }
+        } catch (error) {
+            console.error('Error creating forum post:', error);
+        }
+    };
+
     return (
         <div>
             <Card noPadding={false}>
-                <form className="w-full ">
+                <form className="w-full" onSubmit={handleSubmit}>
                     <div className="my-1">
                         <textarea
                             id="content"
@@ -33,10 +60,9 @@ const Post = () => {
                             </label>
                             <input
                                 type="file"
-                                id="media"
-                                name="media"
-                                accept="image/*, video/*" // Updated accept attribute
-                                //   onChange={handleMediaUpload}
+                                id="image"
+                                name="image"
+                                accept="image/*, video/*"
                                 className="w-full border rounded-lg py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
                         </div>
@@ -55,7 +81,6 @@ const Post = () => {
                             >
                                 <div className="absolute -z-10 -inset-0.5  rounded-xl blur-xl group-hover:opacity-100 animate-pulse group-hover:inset-10"></div>
                                 <div className="svg-wrapper transform group-hover:translate-x-5 group-hover:rotate-45 transition-all duration-400">
-
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
