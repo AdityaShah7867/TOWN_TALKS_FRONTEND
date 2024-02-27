@@ -6,9 +6,16 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [events, setEvents] = useState([]);
+
+
+  const navigate = useNavigate()
+
+  const [events, setEvents] = useState([])
+
+
 
   const getEventByUserId = async () => {
     const response = await axios.get(
@@ -77,15 +84,18 @@ function Dashboard() {
         <h2>Dashboard</h2>
 
         <div className="flex space-x-8 py-6">
-          {events.map((event) => (
-            <div
-              key={event._id}
-              className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center"
-            >
-              <h2>{event.title}</h2>
-              <li className="text-gray-500 mt-3">{event.description}</li>
-            </div>
-          ))}
+
+          {
+            events.map(event => (
+              <div onClick={() => {
+                navigate(`/home/${event._id}`)
+              }} key={event._id} className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center">
+                <h2>{event.title}</h2>
+                <li className="text-gray-500 mt-3">{event.description}</li>
+              </div>
+            ))
+          }
+
         </div>
         <div className="flex space-x-8 py-6 w-4/5">
           <div className="flex flex-col rounded-md border w-full p-8 justify-center">
