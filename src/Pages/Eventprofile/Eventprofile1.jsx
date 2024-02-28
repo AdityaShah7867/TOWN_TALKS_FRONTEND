@@ -109,6 +109,14 @@ const Eventprofile1 = () => {
     setFeedback({ ...feedback, experience: event.target.value });
   };
 
+  function StarRating({ rating }) {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<span key={i} className="text-yellow-400">&#9733;</span>);
+    }
+    return <div>{stars}</div>;
+  }
+
   const handleSubmitFeedback = async (event) => {
     event.preventDefault();
 
@@ -138,207 +146,160 @@ const Eventprofile1 = () => {
     <div>
       <div className="bg-gray-100">
         <center>
-            <br/>
-          <p className="font-semibold  mb-4  font-sans text-3xl">
+          <br />
+          <p className="font-semibold font-sans text-3xl">
             {" "}
             {event.title}{" "}
           </p>
         </center>
         <hr />
-        <br/>
-        <div class="flex">
+        <br />
+        <div class="md:flex">
           <div class="w-3/4 flex flex-col mx-4 items-end">
-          <img
-              src={"http://localhost:4000/" + event.image}
-              alt=""
-              className="w-2/3 h-4/5 rounded-3xl"
-            />
-          </div>
-          <div class="w-1/2">
-          <div className="w-2/3 justify-center  items-center p-4">
-            <div>
-              <form
-                onSubmit={handleSubmitFeedback}
-                className="max-w-1/2 mx-auto p-4 bg-white shadow-md rounded-md"
-              >
-                <p className="font-semibold text-xl mb-4">
-                  Feedback for the Event
-                </p>
-
-                {/* Rating Section */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="rating"
-                    className="block font-medium text-base"
-                  >
-                    Rate your Experience:
-                  </label>
-                  <div className="flex flex-row gap-2">
-                    {[1, 2, 3, 4, 5].map((value) => (
-                      <React.Fragment key={value}>
-                        <input
-                          type="radio"
-                          id={`rating${value}`}
-                          name="rating"
-                          value={value}
-                          className="form-radio text-blue-500 focus:ring focus:border-blue-300"
-                          onChange={() => handleRatingChange(value)}
-                        />
-                        <label
-                          htmlFor={`rating${value}`}
-                          className="cursor-pointer text-lg mr-2"
-                        >
-                          {value}
-                        </label>
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Experience Sharing Section */}
-                <div className="mb-4">
-                  <label
-                    htmlFor="feedback"
-                    className="block font-medium text-base"
-                  >
-                    Share your Experience:
-                  </label>
-                  <textarea
-                    id="feedback"
-                    name="feedback"
-                    placeholder="Enter your feedback"
-                    className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-                    value={feedback.experience}
-                    onChange={handleExperienceChange}
-                  ></textarea>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                >
-                  Submit Feedback
-                </button>
-              </form>
-              </div>
-
-              <div className="bg-white mt-4 rounded-md p-4">
-              <p className="">
-                  {" "}
-                  Start Date: {formatDateTime(event.startDate)}
-                </p>
-                <p className=""> End Date: {formatDateTime(event.endDate)}</p>
-                <br/>
-                Organised by : {event.userId && (
-                <p className="font-medium text-lg">
-                  Organizer: {event.userId.username}
-                </p>
-              )}
-              </div>
-
-
-
-
-            </div>  
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-center items-center origin-center pb-10">
-        <div className="w-3/4 flex flex-col justify-center self-center bg-gray-50">
-          <div className="flex flex-col lg:flex-row justify-center gap-5 items-center  h-screen">
             <img
               src={"http://localhost:4000/" + event.image}
               alt=""
               className="w-2/3 h-4/5 rounded-3xl"
             />
-            <div className="w-1/3  flex flex-row overflow-scroll lg:flex-col lg:gap-6  ">
-              <img
-                src={"http://localhost:4000/" + event.image}
-                alt=""
-                className="rounded-2xl h-48"
-              />
-              <img
-                src={"http://localhost:4000/" + event.image}
-                alt=""
-                className="rounded-2xl h-48"
-              />
-              <img
-                src={"http://localhost:4000/" + event.image}
-                alt=""
-                className="rounded-2xl h-48"
-              />
-            </div>
           </div>
-          <div className="flex flex-row -mt-8">
-            <div className="w-2/3 mr-5 border-2 flex flex-col shadow-md p-2 bg-white">
-              {event.eventMode === "offline" ? (
-                <>
-                  <p className="font-semibold text-3xl">
-                    {" "}
-                    {event.title}{" "}
-                    <a className="text-xl font-medium">(Offline)</a>
+          <div class=" w-full md:w-1/2">
+            <div className="w-full md:w-2/3 justify-center  items-center p-4">
+              <div>
+                <form
+                  onSubmit={handleSubmitFeedback}
+                  className=" w-full md:max-w-1/2 mx-auto p-4 bg-white shadow-md rounded-md"
+                >
+                  <p className="font-semibold text-xl mb-4">
+                    Feedback for the Event
                   </p>
-                  <p className="font-medium text-lg mt-2">
-                    {event.city} - {event.zip}
-                  </p>
-                  {/* Add any other elements you want to render when eventMode is offline */}
-                </>
-              ) : (
-                <>
-                  <p className="font-semibold text-3xl">
-                    {" "}
-                    {event.title}{" "}
-                    <a className="text-xl font-medium">(Online)</a>
-                  </p>
-                  <p className="font-medium text-lg mt-2">
-                    Meeting Link: {event.meetingLink}
-                  </p>
-                  {/* Add any other elements you want to render when eventMode is online */}
-                </>
-              )}
-              {event.userId && (
-                <p className="font-medium text-lg">
-                  Organizer: {event.userId.username}
-                </p>
-              )}
-              2
-              <p className="font-extralight text-2xl mt-3">
-                {event.description}
-              </p>
-              <div className="flex flex-row gap-5 font-medium text-lg mt-2">
+
+                  {/* Rating Section */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="rating"
+                      className="block font-medium text-base"
+                    >
+                      Rate your Experience:
+                    </label>
+                    <div className="flex flex-row gap-2">
+                      {[1, 2, 3, 4, 5].map((value) => (
+                        <React.Fragment key={value}>
+                          <input
+                            type="radio"
+                            id={`rating${value}`}
+                            name="rating"
+                            value={value}
+                            className="form-radio text-blue-500 focus:ring focus:border-blue-300"
+                            onChange={() => handleRatingChange(value)}
+                          />
+                          <label
+                            htmlFor={`rating${value}`}
+                            className="cursor-pointer text-lg mr-2"
+                          >
+                            {value}
+                          </label>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Experience Sharing Section */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="feedback"
+                      className="block font-medium text-base"
+                    >
+                      Share your Experience:
+                    </label>
+                    <textarea
+                      id="feedback"
+                      name="feedback"
+                      placeholder="Enter your feedback"
+                      className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+                      value={feedback.experience}
+                      onChange={handleExperienceChange}
+                    ></textarea>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                  >
+                    Submit Feedback
+                  </button>
+                </form>
+              </div>
+
+              <div className="bg-white mt-4 rounded-md p-4">
                 <p className="">
                   {" "}
                   Start Date: {formatDateTime(event.startDate)}
                 </p>
                 <p className=""> End Date: {formatDateTime(event.endDate)}</p>
-              </div>
-              <p className=" font-medium text-lg mt-4">
-                {" "}
-                No of Registrations:{event?.participants?.length}
-              </p>
-              {/* <PieChart data={pieChartData} />
-                        <ColumnChart data={chartData} categories={chartCategories} /> */}
-              {feedbacks.map((feedback) => (
-                <div
-                  key={feedback._id}
-                  className="flex flex-col gap-2 p-2 border-2 rounded-md mt-4"
-                >
-                  <p className="font-semibold text-xl">
-                    User: {feedback.userId.username}
-                  </p>
-                  <p className="font-medium text-lg">
-                    Comment: {feedback.suggestion}
-                  </p>
-                  <p className="font-medium text-lg">
-                    Rating: {feedback.rating}
-                  </p>
+                <br />
+
+                <p className=" font-medium text-lg mt-4">
+                  {" "}
+                  No of Registrations:{event?.participants?.length}
+                </p>
+
+                <div className="w-2/3 mr-5  flex flex-col  bg-white">
+                  {event.eventMode === "offline" ? (
+                    <>
+                      <p className="font-semibold text-3xl">
+                        <a className="text-xl font-medium">
+                          Happening : Offline{" "}
+                        </a>
+                      </p>
+                      <p className="font-medium text-lg mt-2">
+                        {event.city} - {event.zip}
+                      </p>
+                      {/* Add any other elements you want to render when eventMode is offline */}
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold text-3xl">
+                        <a className="text-xl font-medium">
+                          Happpening : Online
+                        </a>
+                      </p>
+                      <p className="font-medium text-lg mt-2">
+                        Meeting Link: {event.meetingLink}
+                      </p>
+                      {/* Add any other elements you want to render when eventMode is online */}
+                    </>
+                  )}
                 </div>
-              ))}
+                
+              </div>
             </div>
-           
           </div>
         </div>
+        <center>
+        <div className="p-8">
+      <div className="bg-white md:-mt-36 p-2 items-center justify-center">
+        <p> USER REVIEWS</p>
+        {feedbacks.map((feedback) => (
+          <div
+            key={feedback._id}
+            className="flex flex-col gap-2 p-2 border-2 rounded-md mt-4"
+          >
+            <p className="font-semibold text-xl">
+              User: {feedback.userId.username}
+            </p>
+            <p className="font-medium text-lg">
+              Comment: {feedback.suggestion}
+            </p>
+            <div className="flex items-center justify-center">
+              <p className="font-medium text-lg">Rating: </p>
+              <StarRating rating={feedback.rating} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+        </center>
       </div>
     </div>
   );
