@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 // import Chart from "../../Components/Chart/Chart";
-// import PieChart from "../../Components/Chart/Piechart";
+import PieChart from "../../Components/Chart/Piechart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
-import PieChart from "../../Components/Chart/Piechart";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   const [events, setEvents] = useState([]);
 
   const getEventByUserId = async () => {
@@ -80,6 +82,9 @@ function Dashboard() {
         <div className="flex space-x-8 py-6">
           {events.map((event) => (
             <div
+              onClick={() => {
+                navigate(`/home/${event._id}`);
+              }}
               key={event._id}
               className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center"
             >

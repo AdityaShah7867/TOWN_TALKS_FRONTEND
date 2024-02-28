@@ -105,11 +105,12 @@ const Eventprofile1 = () => {
         setFeedback({ ...feedback, experience: event.target.value });
     };
 
-    const handleSubmitFeedback = (event) => {
+    const handleSubmitFeedback = async (event) => {
         event.preventDefault();
 
 
-        createFeedback();
+        await createFeedback();
+        getFeedBacksByEventyId()
     };
 
     function formatDateTime(dateTimeString) {
