@@ -2,16 +2,19 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLoader } from "../../Context/LoaderContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isLoading, showLoader, hideLoader } = useLoader();
 
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     try {
+      showLoader();
       const response = await axios.post(
         "http://localhost:4000/api/user/login",
         {
@@ -19,17 +22,19 @@ const Login = () => {
           password,
         }
       );
-
+      hideLoader();
       if (response.data.success) {
         toast.success("Login Successful");
         toast("Redirecting");
         localStorage.setItem("auth", response.data.data);
         navigate("/home");
+        window.location.reload();
       } else {
         toast.error(response.data.message);
         console.log(response.data.message);
       }
     } catch (error) {
+      hideLoader();
       console.error("Login failed:", error.message);
       toast.error("Login failed. Please try again.");
     }

@@ -4,7 +4,6 @@ import PieChart from "../../Components/Chart/Piechart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { FaSquarePollVertical } from "react-icons/fa6";
 import { MdEvent } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 import ColumnChart from "../../Components/Chart/Columnchart";
@@ -151,80 +150,91 @@ function Dashboard() {
       </div>
 
       {showModal && (
-  <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div className="bg-white rounded-lg p-8">
-      <h1 className="text-xl font-semibold mb-4">LET'S CREATE A POLL!</h1>
-      <form>
-        <div className="mb-4">
-          <br/>
-          <label htmlFor="title" className="block text-sm w-96 font-medium text-gray-700">
-            Title:
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter poll title"
-          />
+        <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-8">
+            <h1 className="text-xl font-semibold mb-4">LET'S CREATE A POLL!</h1>
+            <form>
+              <div className="mb-4">
+                <br />
+                <label
+                  htmlFor="title"
+                  className="block text-sm w-96 font-medium text-gray-700"
+                >
+                  Title:
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+                  placeholder="Enter poll title"
+                />
+              </div>
+              <br />
+              <div className="mb-4">
+                <label
+                  htmlFor="option1"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Option 1:
+                </label>
+                <input
+                  type="text"
+                  id="option1"
+                  name="option1"
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+                  placeholder="Enter option 1"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="option2"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Option 2:
+                </label>
+                <input
+                  type="text"
+                  id="option2"
+                  name="option2"
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+                  placeholder="Enter option 2"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="option3"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Option 3:
+                </label>
+                <input
+                  type="text"
+                  id="option3"
+                  name="option3"
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+                  placeholder="Enter option 3"
+                />
+              </div>
+              <br />
+              <div className="flex justify-between">
+                <button
+                  onClick={toggleModal}
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                >
+                  Create Poll
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <br/>
-        <div className="mb-4">
-          <label htmlFor="option1" className="block text-sm font-medium text-gray-700">
-            Option 1:
-          </label>
-          <input
-            type="text"
-            id="option1"
-            name="option1"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter option 1"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="option2" className="block text-sm font-medium text-gray-700">
-            Option 2:
-          </label>
-          <input
-            type="text"
-            id="option2"
-            name="option2"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter option 2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="option3" className="block text-sm font-medium text-gray-700">
-            Option 3:
-          </label>
-          <input
-            type="text"
-            id="option3"
-            name="option3"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter option 3"
-          />
-        </div>
-        <br/>
-        <div className="flex justify-between">
-          <button
-            onClick={toggleModal}
-            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-          >
-            Create Poll
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 }

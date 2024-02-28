@@ -5,13 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './Context/AuthContext';
 import { EventProvider } from './Context/EventContext';
+import { LoaderProvider } from './Context/LoaderContext';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
       <EventProvider>
+      <LoaderProvider>
         <App />
+        </LoaderProvider>
       </EventProvider>
     </AuthProvider>
   </React.StrictMode>

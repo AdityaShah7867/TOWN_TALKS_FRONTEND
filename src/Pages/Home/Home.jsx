@@ -5,7 +5,6 @@ import { useEvent } from "../../Context/EventContext";
 import { useState } from "react";
 // import Multi from "../../Components/Multi/Multi";
 import Search from "../../Components/Multi/Search";
-
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -15,6 +14,7 @@ const Home = () => {
     fetchEvents().then((response) => {
       setEvents(response.data);
     });
+    // window.location.reload();
   }, []);
 
   let formattedEvents = events.filter((event) => {
@@ -26,7 +26,7 @@ const Home = () => {
   }, [searchText]);
 
   return (
-    <div className="bg-gray-100 p-12 min-h-screen overflow-hid font-sans">
+    <div className="bg-gray-100 p-12 min-h-screen overflow-hid font-sans ">
       <div>
         <p className="text-3xl font-bold ml-8">FIND EVENTS</p>
         {/* <Multi searchText={searchText} setSearchText={setSearchText} /> */}
