@@ -44,7 +44,7 @@ const App = () => {
 
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-          
+
 
 
 
@@ -60,7 +60,7 @@ const App = () => {
             <Route path="/" element={<Private />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/chat/:communityId" element={<GrpChat />} />
-              <Route path="organization/:id" element={<OrganizationDetail />} />
+              <Route path="/:id" element={<OrganizationDetail />} />
               <Route path="/Home" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/forum" element={<Forum />} />
@@ -69,6 +69,7 @@ const App = () => {
               <Route path="/room/:roomId" element={<Room />} />
               <Route path="/polls" element={<Poll />} />
               <Route path="/home/:eventId" element={<EventProfile />} />
+              <Route path="/organization/:id" element={< OrganizationDetail />}></Route>
             </Route>
 
 

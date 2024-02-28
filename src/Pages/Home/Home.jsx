@@ -30,7 +30,7 @@ const Home = () => {
       <div>
 
         <p className='text-3xl font-bold ml-8'>FIND EVENTS</p>
-        {/* <Multi searchText={searchText} setSearchText={setSearchText} /> */}
+        <Multi searchText={searchText} setSearchText={setSearchText} />
 
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
