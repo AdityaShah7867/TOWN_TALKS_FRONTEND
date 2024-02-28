@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
           <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
             <div className="mt-12 flex flex-col items-center">
               <h1 className="text-2xl xl:text-3xl font-extrabold">
-                Sign in for CivicHub
+                Sign in for Town Talks
               </h1>
               <div className="w-full flex-1 mt-8">
                 <form onSubmit={handleLogin}>
@@ -78,6 +78,13 @@ const Login = () => {
                     </svg>
                     <span className="ml-3">Sign In</span>
                   </button>
+                  <br />
+                  <Link
+                    to="/register"
+                    className="text-black hover:text-blue-600 underline "
+                  >
+                    Click here to SignUp
+                  </Link>
                 </form>
               </div>
             </div>

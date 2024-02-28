@@ -36,7 +36,8 @@ const EventCard = ({ event }) => {
 
     const handleCommunity = () => {
         if (event.communityId) {
-            navigate(`/chat/${event.communityId}`)
+            // navigate(`/chat/${event.communityId}`)
+            navigate(`/home/${event?._id}`)
         } else {
             toast.error('No community found')
         }

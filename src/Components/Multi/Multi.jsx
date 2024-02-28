@@ -13,7 +13,7 @@ const Multi = () => {
         {/* <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
           <Search searchText={searchText} setSearchText={setSearchText} />
         </div>
-        <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+        {/* <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
           <Mode />
         </div>
         <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
