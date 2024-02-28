@@ -1,8 +1,56 @@
-import React from "react";
+
+import React, { useEffect } from "react";
+import axios from 'axios'
+import { useState } from "react";
 import { IoMdHeart } from "react-icons/io";
 
 
 const OrganizationDetail = () => {
+
+  const [organization, setOrganization] = useState({});
+  const [events, setEvents] = useState([]);
+
+  const getOrganization = async () => {
+    const response = await axios.get(
+      "http://localhost:4000/api/user/getOrganiser",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      console.log(response.data);
+      setOrganization(response.data.data);
+    }
+
+  };
+
+
+  const getEventByUserId = async () => {
+    const response = await axios.get(
+      "http://localhost:4000/api/event/get-event-by-user-id",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      console.log(response.data);
+      setEvents(response.data);
+    }
+  };
+
+  useEffect(() => {
+    getOrganization()
+    getEventByUserId();
+  }, [])
+
+
+
   return (
     <div>
       <link
@@ -93,20 +141,13 @@ const OrganizationDetail = () => {
                           Number of members join
                         </span>
                       </div>
-                      {/* <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                          89
-                        </span>
-                        <span className="text-sm text-blueGray-400">
-                          Comments
-                        </span>
-                      </div> */}
+
                     </div>
                   </div>
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-bold leading-normal mb-3">
-                    LOGIC_LABS
+                    {organization.username}
                   </h3>
                 </div>
                 <hr />
@@ -117,64 +158,29 @@ const OrganizationDetail = () => {
                 <div className="mt-10 py-6 text-center ">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
-                      <div className="container mx-auto  py-8 max-w-4xl">
-                        <div className="grid grid-cols-2 gap-6 ">
-                          {" "}
-                          {/* Changed to 1 column */}
-                          <div className="bg-white rounded-lg p-6 shadow-md">
-                            <img
-                              alt="..."
-                              src="https://source.unsplash.com/random"
-                              className="h-40 w-full rounded-md object-cover mb-6"
-                            />
-                            <h2 className="text-xl font-semibold mb-2">
-                              Tarjeta 1
-                            </h2>
-                            <p className="text-gray-600">
-                              Contenido de la tarjeta 1...
-                            </p>
-                          </div>
-                          <div className="bg-white rounded-lg p-6 shadow-md">
-                            <img
-                              alt="..."
-                              src="https://source.unsplash.com/random"
-                              className="h-40 w-full rounded-md object-cover mb-6"
-                            />
-                            <h2 className="text-xl font-semibold mb-2">
-                              Tarjeta 2
-                            </h2>
+                      <div className="container mx-auto flex flex-row gap-4 flex-wrap  py-8 max-w-4xl">
+                        {
+                          events.map((event) => (
+                            <div className="flex flex-row">
+                              {" "}
+                              {/* Changed to 1 column */}
+                              <div className="bg-white rounded-lg p-6 shadow-md">
+                                <img
+                                  alt="..."
+                                  src={`http://localhost:4000/${event.image}`}
+                                  className="h-40 w-full rounded-md object-cover mb-6"
+                                />
+                                <h2 className="text-xl font-semibold mb-2">
+                                  {event.title}
+                                </h2>
+                                <p className="text-gray-600">
+                                  {event.description}
+                                </p>
+                              </div>
 
-                            <p className="text-gray-600">
-                              Contenido de la tarjeta 2...
-                            </p>
-                          </div>
-                          <div className="bg-white rounded-lg p-6 shadow-md">
-                            <img
-                              alt="..."
-                              src="https://source.unsplash.com/random"
-                              className="h-40 w-full rounded-md object-cover mb-6"
-                            />
-                            <h2 className="text-xl font-semibold mb-2">
-                              Tarjeta 3
-                            </h2>
-                            <p className="text-gray-600">
-                              Contenido de la tarjeta 3...
-                            </p>
-                          </div>
-                          <div className="bg-white rounded-lg p-6 shadow-md">
-                            <img
-                              alt="..."
-                              src="https://source.unsplash.com/random"
-                              className="h-40 w-full rounded-md object-cover mb-6"
-                            />
-                            <h2 className="text-xl font-semibold mb-2">
-                              Tarjeta 4
-                            </h2>
-                            <p className="text-gray-600">
-                              Contenido de la tarjeta 4...
-                            </p>
-                          </div>
-                        </div>
+                            </div>
+                          ))
+                        }
                       </div>
                       <a href="#pablo" className="font-normal text-pink-500">
                         Show more

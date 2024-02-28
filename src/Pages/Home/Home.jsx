@@ -28,8 +28,7 @@ const Home = () => {
   return (
     <div className="bg-gray-100 p-12 min-h-screen overflow-hid font-sans">
       <div>
-        <p className="text-3xl font-bold ml-8">FIND EVENTS</p>
-        {/* <Multi searchText={searchText} setSearchText={setSearchText} /> */}
+
 
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
