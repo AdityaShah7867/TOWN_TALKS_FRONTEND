@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import Chart from "../../Components/Chart/Chart";
+import Chart from "../../Components/Chart/Chart";
 import PieChart from "../../Components/Chart/Piechart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { FaSquarePollVertical } from "react-icons/fa6";
@@ -10,19 +10,60 @@ import { FaArrowLeft } from "react-icons/fa";
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import PieChart from "../../Components/Chart/Piechart";
 
 function Dashboard() {
   const navigate = useNavigate();
 
   const [events, setEvents] = useState([]);
-
   const [showModal, setShowModal] = useState(false);
+  const [pollData, setPollData] = useState({
+    title: "",
+    options: ["", "", ""], // Initialize with three empty options
+  });
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPollData({
+      ...pollData,
+      [name]: value,
+    });
+  };
+
+  const handleOptionChange = (e, index) => {
+    const newOptions = [...pollData.options];
+    newOptions[index] = e.target.value;
+    setPollData({
+      ...pollData,
+      options: newOptions,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/poll/createpoll",
+        pollData
+      );
+      console.log("Poll created successfully:", response.data);
+      // Reset form data
+      setPollData({
+        question: "",
+        options: ["", "", ""],
+      });
+      toggleModal();
+      toast.success("Poll Created Successfully");
+    } catch (error) {
+      toast.error("Error creating poll:", error);
+    }
+  };
+
   const getEventByUserId = async () => {
     const response = await axios.get(
       "http://localhost:4000/api/event/get-event-by-user-id",
@@ -151,80 +192,66 @@ function Dashboard() {
       </div>
 
       {showModal && (
-  <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div className="bg-white rounded-lg p-8">
-      <h1 className="text-xl font-semibold mb-4">LET'S CREATE A POLL!</h1>
-      <form>
-        <div className="mb-4">
-          <br/>
-          <label htmlFor="title" className="block text-sm w-96 font-medium text-gray-700">
-            Title:
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter poll title"
-          />
+        <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-8">
+            <h1 className="text-xl font-semibold mb-4">LET'S CREATE A POLL!</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label
+                  htmlFor="title"
+                  className="block text-sm w-96 font-medium text-gray-700"
+                >
+                  Title:
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="question"
+                  value={pollData.question}
+                  onChange={handleChange}
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+                  placeholder="Enter poll title"
+                  required
+                />
+              </div>
+              {pollData.options.map((option, index) => (
+                <div className="mb-4" key={index}>
+                  <label
+                    htmlFor={`option${index + 1}`}
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Option {index + 1}:
+                  </label>
+                  <input
+                    type="text"
+                    id={`option${index + 1}`}
+                    name={`option${index + 1}`}
+                    value={option}
+                    onChange={(e) => handleOptionChange(e, index)}
+                    className="mt-1 p-2 block w-full border-gray-300 rounded-md"
+                    placeholder={`Enter option ${index + 1}`}
+                    required
+                  />
+                </div>
+              ))}
+              <div className="flex justify-between">
+                <button
+                  onClick={toggleModal}
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                >
+                  Create Poll
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <br/>
-        <div className="mb-4">
-          <label htmlFor="option1" className="block text-sm font-medium text-gray-700">
-            Option 1:
-          </label>
-          <input
-            type="text"
-            id="option1"
-            name="option1"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter option 1"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="option2" className="block text-sm font-medium text-gray-700">
-            Option 2:
-          </label>
-          <input
-            type="text"
-            id="option2"
-            name="option2"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter option 2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="option3" className="block text-sm font-medium text-gray-700">
-            Option 3:
-          </label>
-          <input
-            type="text"
-            id="option3"
-            name="option3"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md"
-            placeholder="Enter option 3"
-          />
-        </div>
-        <br/>
-        <div className="flex justify-between">
-          <button
-            onClick={toggleModal}
-            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-          >
-            Create Poll
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 }
