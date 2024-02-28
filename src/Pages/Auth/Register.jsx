@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -91,6 +92,14 @@ const Register = () => {
                     </svg>
                     <span className="ml-3">Sign Up</span>
                   </button>
+                  <br />
+
+                  <Link
+                    to="/login"
+                    className="text-black hover:text-blue-600 underline "
+                  >
+                    Click here to SignUp
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -78,6 +78,13 @@ const Login = () => {
                     </svg>
                     <span className="ml-3">Sign In</span>
                   </button>
+                  <br />
+                  <Link
+                    to="/register"
+                    className="text-black hover:text-blue-600 underline "
+                  >
+                    Click here to SignUp
+                  </Link>
                 </form>
               </div>
             </div>

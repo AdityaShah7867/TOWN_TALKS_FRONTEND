@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Chart from "../../Components/Chart/Chart";
+// import Chart from "../../Components/Chart/Chart";
 import PieChart from "../../Components/Chart/Piechart";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { FaSquarePollVertical } from "react-icons/fa6";
@@ -10,12 +10,14 @@ import { FaArrowLeft } from "react-icons/fa";
 import ColumnChart from "../../Components/Chart/Columnchart";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import PieChart from "../../Components/Chart/Piechart";
 
 function Dashboard() {
   const navigate = useNavigate();
 
   const [events, setEvents] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
