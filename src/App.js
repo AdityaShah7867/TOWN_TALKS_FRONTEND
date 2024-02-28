@@ -24,7 +24,7 @@ import Chatbot from "./Components/AiBot/ChatBot";
 import OrganizationDetail from "./Pages/OrganizationDetail/OrganizationDetail";
 import Poll from "./Pages/Polling/Poll";
 import Library from "./Pages/Digital/Library";
-
+import Transaction from "./Pages/Dashboard/Transactions";
 
 
 const App = () => {
@@ -67,6 +67,7 @@ const App = () => {
               <Route path="/addevent" element={<Addevent />} />
               <Route path="/video" element={<Video />} />
               <Route path="/room/:roomId" element={<Room />} />
+              <Route path="/transaction" element={<Transaction />} />
               <Route path="/polls" element={<Poll />} />
               <Route path="/home/:eventId" element={<EventProfile />} />
               <Route path="/organization/:id" element={< OrganizationDetail />}></Route>
