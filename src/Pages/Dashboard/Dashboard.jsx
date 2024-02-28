@@ -18,6 +18,7 @@ function Dashboard() {
 
   const [events, setEvents] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [piechartPoll, setpiechartpoll] = useState([]);
   const [pollData, setPollData] = useState({
     title: "",
     options: ["", "", ""], // Initialize with three empty options
@@ -80,8 +81,21 @@ function Dashboard() {
     }
   };
 
+  const getPieChartDataPoll = async () => {
+
+    const response = await axios.get("http://localhost:4000/api/poll/getPollPieChart/65de7f04484c05d6b1fa14f4")
+
+    if (response.status === 200) {
+      console.log(response.data)
+      setpiechartpoll(response.data)
+    }
+
+  }
+
+
   useEffect(() => {
     getEventByUserId();
+    getPieChartDataPoll();
   }, []);
 
   const [pieChartData, setPieChartData] = useState([]);
@@ -133,6 +147,7 @@ function Dashboard() {
   });
 
   return (
+
     <div className="flex">
       <Sidebar />
       <div className="flex flex-col py-10 px-16 h-screen overflow-y-auto w-full ">
@@ -157,6 +172,7 @@ function Dashboard() {
             <h2 className="text-black font-bold text-sans">Event Analytics </h2>
             <div className="flex  gap-14">
               <PieChart data={pieChartData} />
+
               <ColumnChart data={chartData} categories={chartCategories} />
             </div>
             {/* <Chart /> */}
@@ -165,6 +181,8 @@ function Dashboard() {
             </h2>
           </div>
         </div>
+        <h1 className="font-bold text-black">Recent Poll :-</h1>
+        <PieChart data={piechartPoll} />
         <div className="flex space-x-8 py-2">
           <div
             className="flex flex-col justify-center cursor-pointer items-center bg-[#673ab7] text-white  rounded-md border w-[400px] h-[100px] p-8 "
@@ -190,6 +208,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
 
       {showModal && (
         <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
@@ -234,6 +253,8 @@ function Dashboard() {
                   />
                 </div>
               ))}
+
+
               <div className="flex justify-between">
                 <button
                   onClick={toggleModal}
@@ -248,10 +269,13 @@ function Dashboard() {
                   Create Poll
                 </button>
               </div>
+
+
             </form>
           </div>
         </div>
       )}
+
     </div>
   );
 }

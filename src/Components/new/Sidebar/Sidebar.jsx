@@ -18,16 +18,15 @@ const variants = {
   nonexpanded: { width: "6%" },
 };
 
-
-
-
 function Navbar() {
-  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(true);
+  const navigate = useNavigate();
 
-  const handletra = () => {
-    navigate("/transaction");
+  const handleDas = () => {
+    navigate("/dashboard");
   }
+
+
 
   return (
     <motion.div
@@ -52,22 +51,22 @@ function Navbar() {
         <FaArrowLeft />
 
       </div>
-      <div className="logo-div flex space-x-4 items-center">
+      <div className="logo-div flex space-x-4 items-center" >
         <FaArrowLeft />
         <span className={!isExpanded ? "hidden" : "block"}>Profile</span>
       </div>
-      <div className="flex flex-col space-y-8 mt-12">
+      <div className="flex flex-col space-y-8 mt-12 cursor-pointer" onClick={handleDas}>
         <div className="nav-links w-full">
-          <div className="flex space-x-3 w-full p-2 rounded bg-[#FF8C8C] cursor-pointer text-white">
+          <div className="flex space-x-3 w-full p-2 rounded text-black">
             <LayoutDashboard />
             <span className={!isExpanded ? "hidden" : "block"}>Dashboard</span>
           </div>
         </div>
 
-       
+        
 
-        <div className="nav-links w-full cursor-pointer" onClick={handletra}>
-          <div className="flex space-x-3 w-full p-2 rounded">
+        <div className="nav-links w-full">
+          <div className="flex space-x-3 w-full p-2 rounded bg-[#FF8C8C] text-white">
             <ArrowLeftRightIcon />
             <span className={!isExpanded ? "hidden" : "block"}>
               Transactions
