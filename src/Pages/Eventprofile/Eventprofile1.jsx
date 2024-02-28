@@ -213,7 +213,6 @@ const Eventprofile1 = () => {
                                 </div>
                             </div>
 
-                            {/* Experience Sharing Section */}
                             <div className='mb-4'>
                                 <label htmlFor="feedback" className='block font-medium text-base'>Share your Experience:</label>
                                 <textarea

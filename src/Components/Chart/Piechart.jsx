@@ -3,7 +3,7 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 
 const PieChart = ({ data }) => {
-  console.log('data', data)
+  console.log('data from piehcart', data)
   const options = {
     labels: data?.map(item => item.label),
   };
