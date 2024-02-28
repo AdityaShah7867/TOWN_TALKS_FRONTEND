@@ -3,9 +3,21 @@ import React, { useEffect } from "react";
 import axios from 'axios'
 import { useState } from "react";
 import { IoMdHeart } from "react-icons/io";
+import { useParams } from 'react-router-dom'
+
+import { loadStripe } from "@stripe/stripe-js";
+import { useAuth } from "../../Context/AuthContext";
+
+
+
+const REACT_STRIPE_PUBLISHABLE_KEY = "pk_test_51NL6uNSIfpaaiKjZju3kSHWX12S61LRDIl7tzucPbxdavivkQNsIFAhcAKiLgMZ057mURGof1lklhNmn43ogD3DF00gFgYGKHo"
 
 
 const OrganizationDetail = () => {
+  const { user } = useAuth();
+
+  const { id } = useParams();
+
 
   const [organization, setOrganization] = useState({});
   const [events, setEvents] = useState([]);
@@ -26,6 +38,10 @@ const OrganizationDetail = () => {
     }
 
   };
+
+  useEffect(() => {
+    console.log(user)
+  }, [])
 
 
   const getEventByUserId = async () => {
@@ -48,6 +64,33 @@ const OrganizationDetail = () => {
     getOrganization()
     getEventByUserId();
   }, [])
+
+  const makePayment = async () => {
+    const stripe = await loadStripe(REACT_STRIPE_PUBLISHABLE_KEY);
+    const body = { price: 1000, eventId: id, userId: user?._id };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await fetch(
+      "http://localhost:4000/api/create-payment-session",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log(result.error);
+    }
+  };
 
 
 
@@ -97,7 +140,7 @@ const OrganizationDetail = () => {
         </section>
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div className="relative flex flex-col min-w-0 break-words bg-whi`te w-full mb-6 shadow-xl rounded-lg -mt-64">
               <div className="px-6 bg-gray-100 ">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -117,8 +160,8 @@ const OrganizationDetail = () => {
                         type="button"
                       >
                         <div className="flex flex-wrap">
-                        <p>DONATE</p>
-                        <p className=" ml-2 text-xl"> <IoMdHeart /></p>
+                          <p onClick={makePayment}>DONATE</p>
+                          <p className=" ml-2 text-xl"> <IoMdHeart /></p>
                         </div>
                       </button>
                     </div>
