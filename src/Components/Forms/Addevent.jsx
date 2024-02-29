@@ -4,8 +4,12 @@ import bg1 from '../../Assets/Images/bg1.jpg'
 import b1 from '../../Assets/Images/b.jpg'
 import b2 from '../../Assets/Images/back.jpg'
 import axios from 'axios'
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 
 const Addevent = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -74,6 +78,8 @@ const Addevent = () => {
 
             if (response.status === 200) {
                 console.log('Event created successfully')
+                toast.success('Event created successfully')
+                navigate('/dashboard')
             }
 
 

@@ -13,6 +13,7 @@ const EventCard = ({ event }) => {
     const navigate = useNavigate();
     const { user } = useAuth()
     const { fetchEvents } = useEvent();
+
     const joinEvent = async () => {
         const response = await axios.post(
             `http://localhost:4000/api/event/join-event/${event?._id}`,
@@ -29,6 +30,7 @@ const EventCard = ({ event }) => {
         if (response.status === 200) {
             toast.success("You have joined the event");
             fetchEvents()
+            window.location.reload();
         } else {
             toast.error("Failed to join event");
         }
@@ -97,7 +99,7 @@ const EventCard = ({ event }) => {
 
                 <div className="flex justify-between mt-2">
                     <div className=" ml-2 font-sans">
-                        <p>{formatDateTime(event.startDate)}</p>
+                        <p>2nd march 2024</p>
                     </div>
                 </div>
                 <div className="mt-4 font-semibold text-xl font-sans">
@@ -107,11 +109,11 @@ const EventCard = ({ event }) => {
 
                 <div className="mt-8 ml-2 mb-8 ">
                     <span className="h-12 bg-gray-200 p-2 rounded-xl font-sans">
-                        OFFLINE
+                        {event.meetinglink? 'Online' : 'Offline'}
                     </span>
-                    <span className="h-12 ml-4 bg-gray-200 p-2 rounded-xl font-sans">
+                    {/* <span className="h-12 ml-4 bg-gray-200 p-2 rounded-xl font-sans">
                         PAID {event.price}
-                    </span>
+                    </span> */}
                     <span className="text-black font-lg font-bold "></span>
                 </div>
                 <div className="flex justify-between p-4     mt-4">
@@ -142,7 +144,7 @@ const EventCard = ({ event }) => {
                             )
                         }
                     </div>
-                    <div className="flex">
+                    {/* <div className="flex">
                         <img
                             src="https://avatars.githubusercontent.com/u/121731399?v=3"
                             className="rounded-full w-8 h-8"
@@ -156,7 +158,7 @@ const EventCard = ({ event }) => {
                         <div className="bg-gray-800 h-8 w-8 text-white rounded-full">
                             <p className="p-1">+87</p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

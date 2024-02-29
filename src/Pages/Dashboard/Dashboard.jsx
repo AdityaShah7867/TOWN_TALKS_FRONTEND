@@ -83,7 +83,7 @@ function Dashboard() {
 
   const getPieChartDataPoll = async () => {
 
-    const response = await axios.get("http://localhost:4000/api/poll/getPollPieChart/65de7f04484c05d6b1fa14f4")
+    const response = await axios.get("http://localhost:4000/api/poll/getPollPieChart/65deb45e801d80afdbf69b5c")
 
     if (response.status === 200) {
       console.log(response.data)
@@ -160,10 +160,10 @@ function Dashboard() {
                 navigate(`/home/${event._id}`);
               }}
               key={event._id}
-              className="flex flex-col rounded-md border w-[400px] h-[100px] p-8 justify-center"
+              className="flex flex-col rounded-md border w-[420px] h-[120px] p-8 justify-center"
             >
-              <h2>{event.title}</h2>
-              <li className="text-gray-500 mt-3">{event.description}</li>
+              <h2 className="text-sm">{event.title}</h2>
+              <li className="text-gray-500 mt-3 text-sm">{event.description}</li>
             </div>
           ))}
         </div>
