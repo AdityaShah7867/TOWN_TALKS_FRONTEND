@@ -39,21 +39,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
-
-            <Route path="/docs" element={<Document />} />
-
+            {/* <Route path="/docs" element={<Document />} /> */}
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-
-
-
-
-            <Route path="/login" element={<Login />} />
-
-
-
             <Route path="library" element={<Library />} />
-
 
             {/* PRIVATE ROUTES BELOW THIS */}
 
@@ -70,7 +59,7 @@ const App = () => {
               <Route path="/transaction" element={<Transaction />} />
               <Route path="/polls" element={<Poll />} />
               <Route path="/home/:eventId" element={<EventProfile />} />
-              <Route path="/organization/:id" element={< OrganizationDetail />}></Route>
+              <Route path="/organization/:id" element={< OrganizationDetail />}/>
             </Route>
 
 

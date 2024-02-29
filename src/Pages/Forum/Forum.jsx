@@ -44,7 +44,8 @@ const Forum = () => {
       <br />
       <div class="md:flex">
         <div class="md:w-3/4">
-          <div className="flex justify-center items-center ">
+          <div className="flex justify-center ">
+            <iframe src="https://calendar.google.com/calendar/embed?src=a34ff2a03c577095277d42a198f7139365d95924e5201a781a236b554ab38d86%40group.calendar.google.com&ctz=Asia%2FKolkata" frameborder="0" className="w-[400px] h-[400px] pr-5 pl-3"></iframe>
             <div className=" w-full p-2 md:w-2/3">
               <Post setGetForum={setGetForum} />
               <PostCard className="mt-12" forums={forums} />
