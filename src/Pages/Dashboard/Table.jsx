@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios for making HTTP requests
 
-const Table = ({ data }) => {
+const Table = () => {
+  // Define state to store payments data
+  const [payments, setPayments] = useState([]);
+
+  useEffect(() => {
+    // Define a function to fetch payments data from the API
+    const fetchPayments = async () => {
+      try {
+        // Make a GET request to fetch payments data
+        const response = await axios.get(`http://localhost:4000/api/poll/getpayment/65deb210e0289a6f4049d72f`); // Assuming userId is defined somewhere
+        setPayments(response.data); // Set the payments data in state
+      } catch (error) {
+        console.error('Error fetching payments:', error);
+      }
+    };
+
+    // Call the fetchPayments function
+    fetchPayments();
+  }, []); // Empty dependency array to ensure useEffect runs only once
 
   return (
     <div>
-      {/* component */}
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -27,38 +45,29 @@ const Table = ({ data }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    data?.map((item, index) => {
-                      return (
-                        <tr key={index} className="bg-white border-b">
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">{index + 1}</div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">{item.name}</div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">{item.amount}</div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              {item.status}
-                            </span>
-                          </td>
-                        </tr>
-                      )
-                    })
-                  }
-
+                  {/* Map over payments array to generate table rows */}
+                  {payments.map((payment, index) => (
+                    <tr key={payment._id} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Abhay {/* Assuming you have a 'name' property in your payment object */}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {payment.paymentAmount}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        @{payment.paymentStatus}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

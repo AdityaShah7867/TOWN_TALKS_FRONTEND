@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import EventCard from "../../Components/Cards/EventCard";
 import { useEvent } from "../../Context/EventContext";
 import { useState } from "react";
-// import Multi from "../../Components/Multi/Multi";
+import Multi from "../../Components/Multi/Multi";
 import Search from "../../Components/Multi/Search";
 
 const Home = () => {
@@ -27,12 +27,13 @@ const Home = () => {
 
   return (
     <div className="bg-gray-100 p-12 min-h-screen overflow-hid font-sans">
-      <div>
+      <div className="mb-8">
 
 
-        <Search searchText={searchText} setSearchText={setSearchText} />
+        {/* <Search searchText={searchText} setSearchText={setSearchText} /> */}
+        <Multi />
       </div>
-      <div className=" mx-20  flex flex-wrap gap-8 mt-4">
+      <div className="   flex flex-wrap gap-8 mt-4">
         {formattedEvents
           ? formattedEvents.map((event, index) => (
               <EventCard key={index} event={event} />

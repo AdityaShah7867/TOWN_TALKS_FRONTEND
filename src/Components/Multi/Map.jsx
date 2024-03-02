@@ -16,7 +16,7 @@ const Map = () => {
   }, []);
 
   function getCoordinates() {
-    var selectedCity = 'New Delhi';
+    var selectedCity = 'Nerul';
     var geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${selectedCity}&key=${apiKey}`;
     fetch(geocodingUrl)
       .then(response => response.json())
@@ -62,7 +62,7 @@ const Map = () => {
 
   return (
     <>
-      <div ref={mapContainerRef} className="map-container w-full h-full" style={{ height: '300px' }}>
+      <div ref={mapContainerRef} className="map-container w-full h-full" style={{ height: '250px' }}>
         <iframe
           title="Map"
           src={`https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${location.latitude},${location.longitude}&zoom=15`}

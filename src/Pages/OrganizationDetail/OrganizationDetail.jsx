@@ -39,6 +39,8 @@ const OrganizationDetail = () => {
 
   };
 
+  
+
   useEffect(() => {
     console.log(user)
   }, [])
@@ -110,7 +112,7 @@ const OrganizationDetail = () => {
             className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
               backgroundImage:
-                'url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80")',
+                'url("https://upload.wikimedia.org/wikipedia/commons/3/3a/The_National_Service_Scheme_%28NSS%29_Marching_Contingent_passes_through_the_Rajpath%2C_on_the_occasion_of_the_68th_Republic_Day_Parade_2017%2C_in_New_Delhi_on_January_26%2C_2017.jpg")',
             }}
           >
             <span
@@ -148,7 +150,7 @@ const OrganizationDetail = () => {
                       <img
                         alt="..."
                         // src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
-                        src="https://source.unsplash.com/800x800/?people"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeobDdyni_PC5YG80VZG73MWMVuXCbgYhBtn_9nsAVaw&s"
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
