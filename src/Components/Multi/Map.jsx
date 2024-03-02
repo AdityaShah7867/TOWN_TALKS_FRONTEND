@@ -26,7 +26,6 @@ const Map = () => {
           var latitude = location.lat;
           var longitude = location.lng;
           setLocation({ latitude, longitude });
-          // Fetch surrounding locations or use some predefined locations
           fetchSurroundingLocations(latitude, longitude);
         } else {
           console.log('Location coordinates not found');

@@ -12,10 +12,11 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Table from "./Table";
 // import PieChart from "../../Components/Chart/Piechart";
+import { useAuth } from "../../Context/AuthContext";
 
 function Dashboard() {
   const navigate = useNavigate();
-
+  const { user } = useAuth();
   const [events, setEvents] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [pollData, setPollData] = useState({
@@ -132,13 +133,41 @@ function Dashboard() {
     chartCategories.push(item.label);
   });
 
+  const [tabledata, settabledata] = useState([])
+
+
+  const getTableData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/poll/getPayment/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth")}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log(response.data);
+        settabledata(response.data);
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getTableData();
+  }, []);
+
   return (
     <div className="flex">
       <Sidebar />
       <div classname="flex flex-col py-14 px-16 h-screen overflow-y-auto w-full ">
         <h2 className="m-8 p-4 text-3xl">Transactions</h2>
 
-        <Table />
+        <Table data={tabledata} />
       </div>
     </div>
   );
